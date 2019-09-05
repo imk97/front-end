@@ -12,7 +12,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class AdduserPage implements OnInit {
 
-  constructor(private userservice: UserService) { }
+  constructor(private userservice: UserService, public alert: AlertController) { }
 
   ngOnInit() {
   }
@@ -22,7 +22,9 @@ export class AdduserPage implements OnInit {
 
   onSave() {
     this.userservice.addUser(this.user)
-      .subscribe((data: User) => console.log(data));
+      .subscribe(
+        (data: User) => console.log(data)
+      );
   }
 
   // TODO: Remove this when we're done

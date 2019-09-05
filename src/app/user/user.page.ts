@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { UserService } from '../service/user.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +12,7 @@ import { UserService } from '../service/user.service';
 export class UserPage implements OnInit {
 
   user = [];
-  constructor(private userservice: UserService) { }
+  constructor(private userservice: UserService, public loading: LoadingController) { }
 
   ngOnInit() {
     this.getUser();
@@ -20,7 +21,13 @@ export class UserPage implements OnInit {
   getUser(): void {
     this.userservice.getUsers()
       .subscribe(user => {
-        this.user = user.data as [];
+
+        this.loading.create({
+          message: 'Please wait...',
+          duration: 1000
+        }).then(loading => loading.present());
+
+        this.user = user['data'] as [];
         console.log(this.user);
       });
   }
