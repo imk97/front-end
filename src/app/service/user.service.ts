@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders, HttpRequest, HttpResponse } from '
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../class/user';
+import { Login } from '../class/login';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 const httpOptions = {
@@ -11,17 +12,19 @@ const httpOptions = {
   })
 };
 
-const httpBody = {
-  Params: new HttpParams({
-    
+const httpReq = {
+  headers: new HttpHeaders({
+    'Content-Type': 'aaplication/json',
   })
 };
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
   private handleError: HandleError;
+  private user = [];
   url:string = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) { 
@@ -36,7 +39,7 @@ export class UserService {
   }
 
   getUsersById(id:number): Observable<{}> {
-    const nurl = `${this.url+'user'}/${id}`;
+    const nurl = `${this.url+'/user'}/${id}`;
     return this.http.get(nurl, httpOptions)
     .pipe(
       catchError(this.handleError('getUsersById'))
@@ -51,10 +54,34 @@ export class UserService {
   }
 
   deleteUser(id:number): Observable<{}> {
-    const nurl = `${this.url+''}/${id}`;
+    const nurl = `${this.url+'/user'}/${id}`;
     return this.http.delete(nurl, httpOptions)
     .pipe(
       catchError(this.handleError('deleteUser'))
     );
+  }
+
+  updateUser(user: User, id: number) {
+    const nurl = `${this.url+'/user'}/${id}`;
+    return this.http.put(nurl, user,  httpOptions)
+    .pipe(
+      catchError(this.handleError('updateUser'))
+    );
+  }
+
+  loginUsers(users: Login): Observable<any> {
+    //console.log(users);
+    return this.http.post<User>(this.url+'/login', users, httpOptions)
+    .pipe(
+      catchError(this.handleError('updateUser'))
+    );
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem('token')
+  }
+
+  getToken() {
+    return localStorage.getItem('token')
   }
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { UserService } from '../service/user.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { ToastController  } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adduser',
@@ -12,7 +13,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class AdduserPage implements OnInit {
 
-  constructor(private userservice: UserService, public alert: AlertController) { }
+  constructor(private userservice: UserService, public toastController: ToastController,
+    public router: Router ) { }
 
   ngOnInit() {
   }
@@ -20,14 +22,14 @@ export class AdduserPage implements OnInit {
   user: User = new User();
   users: User;
 
-  onSave() {
-    this.userservice.addUser(this.user)
-      .subscribe(
-        (data: User) => console.log(data)
-      );
+  onSave(): void {
+    this.userservice.addUser(this.user).subscribe(
+      data => this.toastController.create({
+        color: 'dark',
+        message: 'Your information have been saved!',
+        duration: 2000
+      }).then(toast => toast.present() )
+    );
+    this.router.navigate(['/home'])
   }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.user); }
-
 }

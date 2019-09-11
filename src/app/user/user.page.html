@@ -9,10 +9,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding no-border>
   <ion-list>
-    <ion-item *ngFor="let u of user">
-      <h4>{{ u.name }}</h4>
-    </ion-item>
+
+    <ion-item-sliding *ngFor="let u of user">
+        <ion-item>
+          <h4>{{ u.name }}</h4>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="getDetail(u.id, u)">Detail</ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+
   </ion-list>
 </ion-content>
