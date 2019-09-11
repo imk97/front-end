@@ -19,8 +19,8 @@ import { DetailuserPageModule } from './detailuser/detailuser.module';
 import { EditUserPageModule } from './edit-user/edit-user.module';
 import { HomePageModule } from './home/home.module';
 import { AuthGuard } from './auth.guard';
-import { LoginPageModule } from './login/login.module';
 import { TokenInterceptorService } from './service/token-interceptor.service';
+import { LoginPageModule } from './login/login.module';
 
 
 @NgModule({
@@ -28,8 +28,8 @@ import { TokenInterceptorService } from './service/token-interceptor.service';
   entryComponents: [],
   imports: [
     BrowserModule,
-    LoginPageModule,
     HttpClientModule,
+    LoginPageModule,
     HomePageModule,
     UserPageModule,
     AdduserPageModule,
@@ -46,11 +46,11 @@ import { TokenInterceptorService } from './service/token-interceptor.service';
     HttpErrorHandler,
     MessageService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {
+    /*{
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    }*/
   ],
   bootstrap: [AppComponent]
 })

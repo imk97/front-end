@@ -69,19 +69,19 @@ export class UserService {
     );
   }
 
-  loginUsers(users: Login): Observable<any> {
+  loginUsers(users: Login): Observable<any> { 
     //console.log(users);
     return this.http.post<User>(this.url+'/login', users, httpOptions)
     .pipe(
-      catchError(this.handleError('updateUser'))
+      catchError(this.handleError('loginUsers'))
     );
   }
 
   loggedIn() {
     return !!localStorage.getItem('token')
   }
-
+  /*
   getToken() {
     return localStorage.getItem('token')
-  }
+  }*/
 }

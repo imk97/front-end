@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
-  { path: 'user', canActivate: [AuthGuard], loadChildren: './user/user.module#UserPageModule' },
+  { path: 'user', loadChildren: './user/user.module#UserPageModule' },
   { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserPageModule' },
   { path: 'detailuser', canActivate: [AuthGuard], loadChildren: './detailuser/detailuser.module#DetailuserPageModule' },
   {
@@ -30,7 +30,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: './detailuser/detailuser.module#DetailuserPageModule'
   },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   {
     path: 'edituser/:id',
     resolve: {
@@ -38,7 +37,8 @@ const routes: Routes = [
     },
     canActivate: [AuthGuard],
     loadChildren: './edit-user/edit-user.module#EditUserPageModule'
-  }
+  },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 
 @NgModule({
