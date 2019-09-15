@@ -26,7 +26,7 @@ export class AdduserPage implements OnInit {
     this.userservice.addUser(this.user).subscribe(
       data => this.toastController.create({
         color: 'dark',
-        message: JSON.stringify(data['message']),
+        message: data['message'],
         duration: 2000
       }).then(toast => toast.present() )
     );

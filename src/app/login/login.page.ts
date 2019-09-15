@@ -24,14 +24,20 @@ export class LoginPage implements OnInit {
     console.log(this.user);
     this.userservice.loginUsers(this.user).subscribe(
       res => {
+        
         console.log(res);
         this.toastController.create({
+          color: 'dark',
           message: (res['message']),
           duration: 2000,
-        }).then(toast => toast.present())
+        }).then(toast => toast.present());
+        if(res['message'] == 'Successfully login') {
+          this.router.navigate(['/home']);
+        }
         //localStorage.setItem('token', res.access_token)
         //this.router.navigate(['/home'])
       }
+      
     )
   }
 

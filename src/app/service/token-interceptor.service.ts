@@ -11,10 +11,10 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(req, next) {
     let userToken = this.injector.get(UserService);
-    console.log(userToken.getToken())
+    //console.log(userToken.getToken())
     let tokenizedReq = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${userToken.getToken()}`
+        Authorization: 'Bearer xx.yy.zz'
       }
     })
     return next.handle(tokenizedReq)

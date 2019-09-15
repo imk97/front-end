@@ -4,6 +4,7 @@ import { User } from '../class/user';
 import { DataService } from '../service/data.service';
 import { UserService } from '../service/user.service';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,7 +16,8 @@ export class EditUserPage implements OnInit {
   constructor(public route: ActivatedRoute,
     public router: Router,
     private userservice: UserService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public location: Location
   ) { }
 
   data: any;
@@ -29,31 +31,23 @@ export class EditUserPage implements OnInit {
   }
 
   onUpdate(data: User, id: number): void {
-    let save = this.userservice.updateUser(data, id).subscribe(data => { console.log(id) });
+    let save = this.userservice.updateUser(data, id).subscribe(data => {
+      if (save) {
+        this.alertController.create({
+          header: 'Confirm!',
+          message: data['message'],
+          buttons: ['OK']
+        }).then(toast => toast.present());
+        if (data['message'] == 'Success updated!') {
+          this.router.navigate(['/home'])
+        } else {
+          this.router.navigateByUrl('/user', { skipLocationChange: true }).then(() => {
+            this.router.navigate([this.location.path()])
+          })
 
-    if (save) {
-      this.alertController.create({
-        header: 'Confirm!',
-        message: 'Your User information have been updated!',
-        buttons: [
-          {
-            text: 'Cancel',
-            handler: () => {
-              console.log("Cancel");
-            }
-          },
-          {
-            text: 'Yes',
-            handler: () => {
-              this.router.navigate(['/home']);
-            }
-          }
-        ]
-      }).then(
-        toast => toast.present()
-      );
-    }
-
+        }
+      }
+    });
   }
 
 }

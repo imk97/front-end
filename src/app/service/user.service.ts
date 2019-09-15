@@ -25,7 +25,7 @@ export class UserService {
 
   private handleError: HandleError;
   private user = [];
-  url:string = 'http://localhost:8000/api';
+  url:string = 'http://192.168.0.112:8000/api';
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) { 
     this.handleError = httpErrorHandler.createHandleError('UserService');

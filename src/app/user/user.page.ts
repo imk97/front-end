@@ -43,15 +43,22 @@ export class UserPage implements OnInit {
       subHeader: 'Do you confirm to delete this user?',
       buttons: [
         {
+          text: 'No',
+          handler: () => {console.log("cancel");}
+        },
+        {
           text: 'Yes',
           handler: () => {
             console.log(id);
-            this.userservice.deleteUser(id).subscribe();
+            this.userservice.deleteUser(id).subscribe(
+              res => {
+                console.log(res['message'])
+                if(res['message'] == 'Success') {
+                  this.router.navigate['/user']
+                }
+              }
+            );
           }
-        },
-        {
-          text: 'No',
-          handler: () => {console.log("cancel");}
         }
       ]
     }).then(alert => alert.present());
