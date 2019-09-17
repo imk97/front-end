@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.page.html',

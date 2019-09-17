@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
           duration: 2000,
         }).then(toast => toast.present());
         if(res['message'] == 'Successfully login') {
+          localStorage.setItem('token', res.access_token)
           this.router.navigate(['/home']);
         }
         //localStorage.setItem('token', res.access_token)

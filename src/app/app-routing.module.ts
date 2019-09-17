@@ -11,13 +11,18 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
-  { path: 'user', loadChildren: './user/user.module#UserPageModule' },
+  {
+    path: 'user',
+    canActivate: [AuthGuard],
+    loadChildren: './user/user.module#UserPageModule'
+  },
   { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserPageModule' },
   { path: 'detailuser', loadChildren: './detailuser/detailuser.module#DetailuserPageModule' },
   {
@@ -29,6 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'edituser/:id',
+    canActivate: [AuthGuard],
     resolve: {
       special: DataResolverService
     },

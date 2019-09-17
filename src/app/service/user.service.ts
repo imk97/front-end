@@ -6,15 +6,11 @@ import { User } from '../class/user';
 import { Login } from '../class/login';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 const httpReq = {
   headers: new HttpHeaders({
-    'Content-Type': 'aaplication/json',
+    'Content-Type': 'aaplication/json'
+
   })
 };
 
@@ -23,16 +19,29 @@ const httpReq = {
 })
 export class UserService {
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':  `Bearer ${this.getToken()}`
+    })
+  };
+
+  httpOpt = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
   private handleError: HandleError;
   private user = [];
-  url:string = 'http://192.168.0.112:8000/api';
+  url:string = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) { 
     this.handleError = httpErrorHandler.createHandleError('UserService');
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url+'/users', httpOptions)
+    return this.http.get<User[]>(this.url+'/users', this.httpOptions)
     .pipe(
       catchError(this.handleError('getUsers', []))
     );
@@ -40,14 +49,14 @@ export class UserService {
 
   getUsersById(id:number): Observable<{}> {
     const nurl = `${this.url+'/user'}/${id}`;
-    return this.http.get(nurl, httpOptions)
+    return this.http.get(nurl, this.httpOptions)
     .pipe(
       catchError(this.handleError('getUsersById'))
     );
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url+'/user', user, httpOptions)
+    return this.http.post<User>(this.url+'/user', user, this.httpOpt)
     .pipe(
       catchError(this.handleError('addUser', user))
     );
@@ -55,7 +64,7 @@ export class UserService {
 
   deleteUser(id:number): Observable<{}> {
     const nurl = `${this.url+'/user'}/${id}`;
-    return this.http.delete(nurl, httpOptions)
+    return this.http.delete(nurl, this.httpOptions)
     .pipe(
       catchError(this.handleError('deleteUser'))
     );
@@ -63,7 +72,7 @@ export class UserService {
 
   updateUser(user: User, id: number) {
     const nurl = `${this.url+'/user'}/${id}`;
-    return this.http.put(nurl, user,  httpOptions)
+    return this.http.put(nurl, user,  this.httpOptions)
     .pipe(
       catchError(this.handleError('updateUser'))
     );
@@ -71,7 +80,7 @@ export class UserService {
 
   loginUsers(users: Login): Observable<any> { 
     //console.log(users);
-    return this.http.post<User>(this.url+'/login', users, httpOptions)
+    return this.http.post<User>(this.url+'/login', users, this.httpOpt)
     .pipe(
       catchError(this.handleError('loginUsers'))
     );
@@ -80,8 +89,8 @@ export class UserService {
   loggedIn() {
     return !!localStorage.getItem('token')
   }
-  /*
+  
   getToken() {
     return localStorage.getItem('token')
-  }*/
+  }
 }
