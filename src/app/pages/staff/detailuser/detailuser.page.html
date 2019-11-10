@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>Detail Person</ion-list-header>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label color="dark">
+          &nbsp;{{ data.name }}
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-icon name="list"></ion-icon>
+        &nbsp;{{ data.ic }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="home"></ion-icon>
+        &nbsp;{{ data.address }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="information-circle"></ion-icon>
+        &nbsp;{{ data.username }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="call"></ion-icon>
+        &nbsp;{{ data.phone }}
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer padding no-border>
+  <ion-button expand="block" (click)="edit(data.id, data)">Edit</ion-button>
+</ion-footer>

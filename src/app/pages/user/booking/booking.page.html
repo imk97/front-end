@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Book
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <form #bookForm="ngForm">
+    <ion-item lines="inset">
+      <ion-label position="floating">Car registeration no</ion-label>
+      <ion-input type="text" name="plateNum" [(ngModel)]="book.plateNum" maxlength="10" #plateNum="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <div [hidden]="plateNum.valid || plateNum.pristine || plateNum.touched" class="alert alert-danger">Plate No.
+      is required</div>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime name="date" [(ngModel)]="book.date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time</ion-label>
+      <ion-select interface="popover" name="time" [(ngModel)]="book.time">
+        <ion-select-option value="09:00">9:00</ion-select-option>
+        <ion-select-option value="09:30">9:30</ion-select-option>
+        <ion-select-option value="10:00">10:00</ion-select-option>
+        <ion-select-option value="10:30">10:30</ion-select-option>
+        <ion-select-option value="11:00">11:00</ion-select-option>
+        <ion-select-option value="11:30">11:30</ion-select-option>
+        <ion-select-option value="12:00">12:00</ion-select-option>
+        <ion-select-option value="12:00">12:30</ion-select-option>
+        <ion-select-option value="13:00">13:00</ion-select-option>
+        <ion-select-option value="13:30">13:30</ion-select-option>
+        <ion-select-option value="14:00">14:00</ion-select-option>
+        <ion-select-option value="14:30">14:30</ion-select-option>
+        <ion-select-option value="15:00">15:00</ion-select-option>
+        <ion-select-option value="15:30">15:30</ion-select-option>
+        <ion-select-option value="16:00">16:00</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-input type="hidden" name="user_id" [(ngModel)]="book.user_id" disabled></ion-input>
+    <ion-button type="button" (click)="onSave()" expand="full">Submit</ion-button>
+
+  </form>
+
+
+</ion-content>

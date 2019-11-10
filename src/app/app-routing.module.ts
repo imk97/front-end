@@ -1,52 +1,101 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DataResolverService } from './resolver/data-resolver.service';
 import { AuthGuard } from './auth.guard';
+import { AdduserPage } from './pages/adduser/adduser.page';
+import { UserPage } from './pages/staff/list-user/user.page';
+import { DataResolverService } from './resolver/data-resolver.service';
+import { HomePage } from './pages/user/home/home.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'login',
+    loadChildren: './pages/login/login.module#LoginPageModule'
   },
   {
     path: 'user',
     canActivate: [AuthGuard],
-    loadChildren: './user/user.module#UserPageModule'
+    loadChildren: './pages/user/home/home.module#HomePageModule',
   },
-  { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserPageModule' },
-  { path: 'detailuser', loadChildren: './detailuser/detailuser.module#DetailuserPageModule' },
+  {
+    path: 'edituser',
+    loadChildren: './pages/user/edit-user/edit-user.module#EditUserPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'staff',
+    loadChildren: './pages/staff/home/home.module#HomePageModule',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add',
+    loadChildren: './pages/adduser/adduser.module#AdduserPageModule'
+  },
+  {
+    path: 'staff/user',
+    loadChildren: './pages/staff/list-user/user.module#UserPageModule'
+  },
+  {
+    path: 'qrcode',
+    canActivate: [AuthGuard],
+    loadChildren: './pages/staff/qrcode/qrcode.module#QrcodePageModule'
+  },
+  //{ path: 'detailuser', loadChildren: './pages/detailuser/detailuser.module#DetailuserPageModule' },
   {
     path: 'detailuser/:id',
     resolve: {
       special: DataResolverService
     },
-    loadChildren: './detailuser/detailuser.module#DetailuserPageModule'
+    loadChildren: './pages/staff/detailuser/detailuser.module#DetailuserPageModule'
   },
   {
-    path: 'edituser/:id',
+    path: 'booking',
+    canActivate: [AuthGuard],
+    loadChildren: './pages/user/booking/booking.module#BookingPageModule'
+  },
+  {
+    path: 'workshop',
+    canActivate: [AuthGuard],
+    loadChildren: './pages/staff/workshop/workshop.module#WorkshopPageModule'
+  },
+  {
+    path: 'listbooking',
+    loadChildren: './pages/staff/listbooking/listbooking.module#ListbookingPageModule'
+  },
+  {
+    path: 'editbooking/:id',
+    loadChildren: './pages/user/edit-booking/edit-booking.module#EditBookingPageModule',
+    resolve: {
+      special: DataResolverService
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'viewbooking',
     canActivate: [AuthGuard],
     resolve: {
       special: DataResolverService
     },
-    loadChildren: './edit-user/edit-user.module#EditUserPageModule'
+    loadChildren: './pages/user/view-booking/view-booking.module#ViewBookingPageModule'
   },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' }
+  { path: 'in-queue', loadChildren: './pages/staff/in-queue/in-queue.module#InQueuePageModule' },
+  { path: 'profile', loadChildren: './pages/user/profile/profile.module#ProfilePageModule' },
+  { path: 'in-service', loadChildren: './pages/staff/in-service/in-service.module#InServicePageModule' },
+  { path: 'password', loadChildren: './pages/user/password/password.module#PasswordPageModule' },
+  { path: 'settings', loadChildren: './pages/user/settings/settings.module#SettingsPageModule' },
+  
+
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
 })

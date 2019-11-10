@@ -32,12 +32,9 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/theme/variables.scss"
-              },
-              {
-                "input": "src/global.scss"
-              }
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "src/assets/vendor/bootstrap/css/bootstrap.css"
             ],
             "scripts": []
           },
@@ -128,7 +125,9 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {

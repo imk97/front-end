@@ -5,7 +5,8 @@ export class User {
     public address:string;
     public username:string;
     public password:string;
-    public phone:number
+    public phone:number;
+    public role:number;
 
     constructor() { }
 

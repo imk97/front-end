@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Update</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onUpdate(user, user.id)">
+    <ion-item lines="inset">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Identity No</ion-label>
+      <ion-input type="text" name="ic" [(ngModel)]="user.ic"></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" name="address" [(ngModel)]="user.address"></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" name="username" [(ngModel)]="user.username"></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="text" name="phone" [(ngModel)]="user.phone"></ion-input>
+    </ion-item>
+    <br>
+    <ion-button expand="block" size="default" type="submit" >
+      Save
+    </ion-button>
+  </form>
+</ion-content>

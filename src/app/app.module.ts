@@ -12,16 +12,17 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { UserPageModule } from './user/user.module';
+import { UserPageModule } from './pages/staff/list-user/user.module';
 import { FormsModule } from '@angular/forms';
-import { AdduserPageModule } from './adduser/adduser.module';
-import { DetailuserPageModule } from './detailuser/detailuser.module';
-import { EditUserPageModule } from './edit-user/edit-user.module';
-import { HomePageModule } from './home/home.module';
+import { AdduserPageModule } from './pages/adduser/adduser.module';
+import { DetailuserPageModule } from './pages/staff/detailuser/detailuser.module';
+import { EditUserPageModule } from './pages/user/edit-user/edit-user.module';
+import { HomePageModule } from './pages/user/home/home.module';
 import { AuthGuard } from './auth.guard';
-import { TokenInterceptorService } from './service/token-interceptor.service';
-import { LoginPageModule } from './login/login.module';
-
+import { LoginPageModule } from './pages/login/login.module';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { Dialogs } from '@ionic-native/dialogs/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,8 @@ import { LoginPageModule } from './login/login.module';
     EditUserPageModule,
     FormsModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     StatusBar,
@@ -45,12 +47,10 @@ import { LoginPageModule } from './login/login.module';
     AuthGuard,
     HttpErrorHandler,
     MessageService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    /*{
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
-      multi: true
-    }*/
+    BarcodeScanner,
+    Network,
+    Dialogs,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

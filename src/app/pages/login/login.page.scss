@@ -1,0 +1,22 @@
+.scroll-content{
+    overflow: hidden;
+    margin-right: -17px;
+    overflow-y: scroll;
+}
+
+.transparent {
+    background: transparent;
+ 
+}
+
+
+h1{
+    color: white;
+}
+
+ion-content {
+    --background: #36465d;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 25px;
+  }

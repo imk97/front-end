@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center">Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="alert alert-success">Welcome to the MCSM, {{ username }}</div>
+<ion-content [scrollEvents]="true">
+  <ion-item>
+    <ion-label (click)="inqueue()">In-Queue</ion-label>
+  </ion-item><br>
+  <ion-item>
+    <ion-label (click)="inservice()">In-service</ion-label>
+  </ion-item><br>
+  <ion-item>
+    <ion-label>Quality Control</ion-label>
+  </ion-item><br>
+  <ion-item>
+    <ion-label>Payment</ion-label>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar (click)="actionSheet()">
+    <div class="center">
+      <ion-icon name="menu" color="light"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-footer>

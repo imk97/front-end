@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Be our squad
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+    <form (ngSubmit)="onSave()" #userForm="ngForm">
+    <ion-item>
+      <ion-label position="floating" for="name">Name</ion-label>
+      <ion-input type="text" id="name" required name="name" [(ngModel)]="user.name" #name="ngModel"></ion-input>
+    </ion-item>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+      <div *ngIf="name.errors.required">Name is required</div>
+    </div>
+    <ion-item>
+      <ion-label for="ic" position="floating">Identity Card</ion-label>
+      <ion-input type="number" id="ic" name="ic" [(ngModel)]="user.ic" #ic="ngModel" required
+        onkeypress="if(this.value.length==12) return false;"></ion-input>
+    </ion-item>
+    <div *ngIf="ic.invalid && (ic.dirty || ic.touched)" class="alert alert-danger">
+      <div *ngIf="ic.errors.required">Identity card is required</div>
+    </div>
+    <ion-item>
+      <ion-label for="address" position="floating">Address</ion-label>
+      <ion-input type="text" id="address" name="address" [(ngModel)]="user.address" #address="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+      <div *ngIf="address.errors.required">Address is required</div>
+    </div>
+    <ion-item>
+      <ion-label for="username" position="floating">Username</ion-label>
+      <ion-input type="text" id="username" name="username" [(ngModel)]="user.username" #username="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+      <div *ngIf="username.errors.required">Username is required</div>
+    </div>
+    <ion-item>
+      <ion-label for="password" position="floating">Password</ion-label>
+      <ion-input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required
+        minlength="8" maxlength="12" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$"></ion-input>
+    </ion-item>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+      <div *ngIf="password.errors.required">Password is required</div>
+      <div *ngIf="password.errors.minlength">Password must be at least 8 characters</div>
+      <div *ngIf="password.errors.pattern">Password must be upper, lower case and number</div>
+    </div>
+    <ion-item>
+      <ion-label for="phone" position="floating">Phone</ion-label>
+      <ion-input type="number" id="phone" name="phone" [(ngModel)]="user.phone" #phone="ngModel" required
+        onkeypress="if(this.value.length==12) return false;"></ion-input>
+    </ion-item>
+    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+      <div *ngIf="phone.errors.required">Phone is required</div>
+    </div>
+    <ion-input type="hidden" name="role" value="1" required></ion-input>
+    <ion-button type="submit" expand="block" [disabled]="!userForm.valid">Submit</ion-button>
+
+  </form>
+</ion-content>

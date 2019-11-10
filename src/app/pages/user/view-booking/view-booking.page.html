@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Monitor Service</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let car of book">
+    <ion-item>
+      <ion-label>{{ car.type }}</ion-label>
+      <!--<ion-note slot="end" >99</ion-note>-->
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>In-Service</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <form (ngSubmit)="save()" #serviceForm="ngForm">
+    <ion-item lines="inset">
+      <ion-label>Estimation Time</ion-label>
+      <ion-select interface="popover" name="time" [(ngModel)]="estTime.time">
+        <ion-select-option value="15">15 Minutes</ion-select-option>
+        <ion-select-option value="30">30 Minutes</ion-select-option>
+        <ion-select-option value="45">45 Minutes</ion-select-option>
+        <ion-select-option value="60">60 Minutes</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" expand="block">Submit</ion-button>
+  </form>
+</ion-content>

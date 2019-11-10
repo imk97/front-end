@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-item color="success" lines="none">
+  <ion-avatar slot="end">
+    <img src="assets/img/person.png">
+  </ion-avatar>
+  <ion-label>Hai, {{ user }}</ion-label>
+</ion-item>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card mode="ios" *ngFor="let books of book">
+    <ion-card-header>
+      <ion-card-subtitle class="text-center" (click)="getservice(books.plateNum)">{{ books.plateNum }}
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button (click)="home()">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+  <ion-tab-button (click)="booking()">
+    <ion-icon name="clipboard"></ion-icon>
+    <ion-label>Booking</ion-label>
+  </ion-tab-button>
+  <ion-tab-button (click)="profile()">
+    <ion-icon name="person"></ion-icon>
+    <ion-label>Profile</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>
+<!--<ion-content padding>
+  
+  <img src="assets/img/car-logo.png" width="60%" class="rounded mx-auto d-block" />
+  <ion-item color="success" lines="none">
+    <ion-avatar slot="start">
+      <img src="assets/img/person.png">
+    </ion-avatar>
+    <ion-label>Hai, {{ user }}</ion-label>
+  </ion-item><br>
+  <ion-item routerLink="/booking" lines="none">
+    <ion-icon slot="start" color="medium" name="create"></ion-icon>
+    <ion-label>Make service appointment</ion-label>
+  </ion-item><br>
+  <ion-item lines="none">
+    <ion-icon slot="start" color="medium" name="information-circle"></ion-icon>
+    <ion-label>Follow up</ion-label>
+  </ion-item>
+
+ 
+</ion-content>-->

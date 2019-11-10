@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Generate QR Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+    <ion-list *ngFor="let book of bookings">
+      <ion-item (click)="getPlateNum(book.plateNum)">
+        <ion-label class="text-center">{{ book.plateNum }}</ion-label>
+      </ion-item>
+    </ion-list>
+</ion-content>

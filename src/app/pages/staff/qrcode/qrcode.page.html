@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="text-center">Quick Response Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ngx-qrcode 
+    [qrc-element-type]="elementType" 
+    [qrc-value]="qrData" 
+    qrc-class="test-class" 
+    qrc-errorCorrectionLevel = "L">
+  </ngx-qrcode>
+</ion-content>

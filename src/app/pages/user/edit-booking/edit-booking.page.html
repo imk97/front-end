@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-card-title>Booking information</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form>
+        <div class="form-group">
+          <ion-label>Plate No</ion-label>
+          <ion-input type="text" name="name" [(ngModel)]="data.plateNum"></ion-input>
+        </div>
+        <div class="form-group">
+          <ion-label>Date</ion-label>
+          <ion-input type="text" name="date" [(ngModel)]="data.date" disabled></ion-input>
+        </div>
+        <div class="form-group">
+          <ion-label>Time</ion-label>
+          <ion-input type="text" name="time" [(ngModel)]="data.time" disabled></ion-input>
+        </div>
+
+        <ion-button>Save</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <!--<form>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="form-group">
+            <ion-label>Plate No</ion-label>
+            <ion-input type="text" name="name" [(ngModel)]="book.plateNum"></ion-input>
+          </div>
+          <div class="form-group">
+            <ion-label>Date</ion-label>
+            <ion-input type="text" name="date" [(ngModel)]="book.date"></ion-input>
+          </div>
+          <div class="form-group">
+            <ion-label>Time</ion-label>
+            <ion-input type="text" name="time" [(ngModel)]="book.time"></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>-->
+</ion-content>
