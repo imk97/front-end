@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title> New Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <form (ngSubmit)="onSave()" #itemForm="ngForm">
+    <ion-item>
+      <ion-label>Item :</ion-label>
+      <ion-input type="text" name="item1" [(ngModel)]="modelinterval.item" #item1="ngModel" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Model</ion-label>
+      <ion-select [(ngModel)]="modelinterval.model_name" name="model_name" required>
+        <ion-select-option *ngFor="let model of models">{{ model.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-button type="submit" expand="block" [disabled]="!itemForm.valid">Save</ion-button>
+  </form>
+
+</ion-content>

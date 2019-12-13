@@ -6,6 +6,7 @@ import { User } from '../class/user';
 import { Login } from '../class/login';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 import { GlobalService } from '../global.service';
+import { Password } from 'src/app/class/password';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,18 @@ export class UserService {
     })
     .pipe(
       catchError(this.handleError('updateUser'))
+    );
+  }
+
+  changePassword(password: Password) {
+    const nurl = `${this.global.url+'/password'}/${password.curr_password}`;
+    return this.http.put(nurl, password, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).pipe(
+      catchError(this.handleError('changePassword'))
     );
   }
 

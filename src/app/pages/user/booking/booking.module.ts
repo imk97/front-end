@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { BookingPage } from './booking.page';
+import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    Ionic4DatepickerModule,
     RouterModule.forChild(routes)
   ],
   declarations: [BookingPage]

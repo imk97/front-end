@@ -3,14 +3,16 @@
     <ion-buttons slot="start">
       <ion-back-button text="" color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title>Generate QR Code</ion-title>
+    <ion-title>List cars</ion-title>
+    <ion-searchbar name="searchdate" [(ngModel)]="searchdate" (ionBlur)="search()" placeholder="YYYY-MM-DD"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-    <ion-list *ngFor="let book of bookings">
-      <ion-item (click)="getPlateNum(book.plateNum)">
-        <ion-label class="text-center">{{ book.plateNum }}</ion-label>
-      </ion-item>
-    </ion-list>
+  <h5 class="text-center">List Cars</h5>
+  <ion-list *ngFor="let book of bookings">
+    <ion-item (click)="getPlateNum(book.plateNum)">
+      <ion-label class="text-center">{{ book.plateNum }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

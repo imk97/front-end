@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './service/user.service';
 import { tokenName } from '@angular/compiler';
+import { DataService } from './service/data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
 
-  public url = 'http://192.168.0.104:8000/api';
-  constructor( ) {}
+  public url = 'http://127.0.0.1:8000/api';
+  constructor(private dataservice: DataService ) {}
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -25,7 +26,12 @@ export class GlobalService {
   };
 
   token() {
-    return sessionStorage.getItem('token')
+    this.dataservice.getToken()
+    return sessionStorage.getItem('token');
+  }
+
+  username() {
+    return this.dataservice.getUsername()
   }
 
   logout() {

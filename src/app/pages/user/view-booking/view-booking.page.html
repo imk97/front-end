@@ -8,10 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let car of book">
+  <ion-list *ngFor="let car of data">
     <ion-item>
-      <ion-label>{{ car.type }}</ion-label>
-      <!--<ion-note slot="end" >99</ion-note>-->
+      {{ car }}
+      <!--<ion-spinner type="crescent"></ion-spinner>-->
     </ion-item>
+    <ion-progress-bar type="indeterminate" hidden></ion-progress-bar>
   </ion-list>
 </ion-content>

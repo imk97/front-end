@@ -19,18 +19,18 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     loadChildren: './pages/user/home/home.module#HomePageModule',
   },
   {
     path: 'edituser',
     loadChildren: './pages/user/edit-user/edit-user.module#EditUserPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'staff',
     loadChildren: './pages/staff/home/home.module#HomePageModule',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
   {
     path: 'add',
@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'qrcode',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     loadChildren: './pages/staff/qrcode/qrcode.module#QrcodePageModule'
   },
   //{ path: 'detailuser', loadChildren: './pages/detailuser/detailuser.module#DetailuserPageModule' },
@@ -55,12 +55,12 @@ const routes: Routes = [
   },
   {
     path: 'booking',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     loadChildren: './pages/user/booking/booking.module#BookingPageModule'
   },
   {
     path: 'workshop',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     loadChildren: './pages/staff/workshop/workshop.module#WorkshopPageModule'
   },
   {
@@ -73,11 +73,11 @@ const routes: Routes = [
     resolve: {
       special: DataResolverService
     },
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'viewbooking',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     resolve: {
       special: DataResolverService
     },
@@ -88,6 +88,11 @@ const routes: Routes = [
   { path: 'in-service', loadChildren: './pages/staff/in-service/in-service.module#InServicePageModule' },
   { path: 'password', loadChildren: './pages/user/password/password.module#PasswordPageModule' },
   { path: 'settings', loadChildren: './pages/user/settings/settings.module#SettingsPageModule' },
+  { path: 'qualitycontrol', loadChildren: './pages/staff/qualitycontrol/qualitycontrol.module#QualitycontrolPageModule' },
+  { path: 'assignservice', loadChildren: './pages/staff/assignservice/assignservice.module#AssignservicePageModule' },
+  { path: 'model-interval', loadChildren: './pages/staff/model-interval/model-interval.module#ModelIntervalPageModule' },
+  { path: 'item', loadChildren: './pages/staff/item/item.module#ItemPageModule' },
+  { path: 'view-service', loadChildren: './pages/staff/view-service/view-service.module#ViewServicePageModule' },
   
 
 ];

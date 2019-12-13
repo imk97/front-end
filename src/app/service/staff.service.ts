@@ -5,6 +5,7 @@ import { GlobalService } from '../global.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
+import { ModelInterval } from 'src/app/class/model-interval';
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +13,23 @@ import { UserService } from './user.service';
 export class StaffService {
 
   private handleError: HandleError;
-  constructor
-    (
-      private http: HttpClient,
-      httpErrorHandler: HttpErrorHandler,
-      public global: GlobalService,
-      private userservice: UserService
-    ) { this.handleError = httpErrorHandler.createHandleError('StaffService'); }
+  constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler, public global: GlobalService, private userservice: UserService) { this.handleError = httpErrorHandler.createHandleError('StaffService'); }
 
-  getServiceByPlateNum(plateNum: string): Observable<{}> {
-    const nurl = `${this.global.url + '/service'}/${plateNum}`;
-    return this.http.get(nurl, 
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
-        })
-    }).pipe
-      (catchError(this.handleError('getServiceByPlateNum')))
+  storeService(model: ModelInterval): Observable<ModelInterval> {
+    return this.http.post<ModelInterval>(this.global.url + '/item', model, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).pipe(catchError(this.handleError('modelInterval', model)))
+  }
+
+  listCar(): Observable<ModelInterval[]> {
+    return this.http.get<ModelInterval[]>(this.global.url+'/list', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).pipe(catchError(this.handleError('listCar', [])));
   }
 }

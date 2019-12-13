@@ -5,6 +5,9 @@ import { DataService } from '../../../service/data.service';
 import { UserService } from '../../../service/user.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
+import { stringify } from 'querystring';
+
+
 
 @Component({
   selector: 'app-edit-user',
@@ -13,22 +16,19 @@ import { Location } from '@angular/common';
 })
 export class EditUserPage implements OnInit {
 
-  constructor(public route: ActivatedRoute,
-    public router: Router,
-    private userservice: UserService,
-    public toast: ToastController,
-    public location: Location
-  ) { }
+  constructor( public route: ActivatedRoute, public router: Router,
+    private userservice: UserService, public toast: ToastController,
+    public location: Location, private dataservice: DataService) { }
 
   user: User = new User();
+  username: string;
 
   ngOnInit() {
     this.userid();
   }
 
   userid() {
-    this.userservice.getUsersById(Number(sessionStorage.getItem('id'))
-    ).subscribe(
+    this.userservice.getUsersById(this.dataservice.getID()).subscribe(
       res => {
         this.user = res['user'][0];
         console.log(this.user)
@@ -37,14 +37,22 @@ export class EditUserPage implements OnInit {
   }
 
   onUpdate(data: User, id: number): void {
-    let save = this.userservice.updateUser(data, id).subscribe(data => {
-      if (save) {
+    this.userservice.updateUser(data, id).subscribe(res => {
+      if (res['message'] == 'No update!') {
         this.toast.create({
-          position: 'bottom',
-          message: data['message'],
+          message: 'User info stay remain.',
           duration: 2000
-        }).then(toast => toast.present());
+        }).then(res => res.present());
+      } else if (res['message'] == 'Success updated!') {
+        this.toast.create({
+          message: 'User info updated.',
+          duration: 2000
+        }).then(res => res.present());
+        this.username = res['username'];
+        this.dataservice.setUsername(this.username)
+        this.router.navigate(['/user'])
       }
+      
     });
   }
 

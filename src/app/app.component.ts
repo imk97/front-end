@@ -31,7 +31,7 @@ export class AppComponent {
       res => {
         this.toast.create(
           {
-            message: 'Your Phone seems offline.',
+            message: 'offline.',
             duration: 2000
           }
         ).then(res => res.present())
@@ -43,7 +43,7 @@ export class AppComponent {
     this.network.onConnect().subscribe(
       res => this.toast.create(
         {
-          message: 'Connected',
+          message: 'Online',
           duration: 2000
         }
       ).then(res => res.present())

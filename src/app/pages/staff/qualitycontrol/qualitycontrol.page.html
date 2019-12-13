@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Quality Control</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="save()">
+    <ion-item>
+      <ion-label>Estimation Time</ion-label>
+      <ion-select interface="popover" name="time">
+        <ion-select-option value="5">5 minutes</ion-select-option>
+        <ion-select-option value="10">10 minutes</ion-select-option>
+        <ion-select-option value="15">15 minutes</ion-select-option>
+        <ion-select-option value="20">20 minutes</ion-select-option>
+        <ion-select-option value="25">25 minutes</ion-select-option>
+        <ion-select-option value="30">30 minutes</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" expand="block">Save</ion-button>
+  </form>
+</ion-content>

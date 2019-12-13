@@ -15,12 +15,9 @@ import { Dialogs } from '@ionic-native/dialogs/ngx';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private userservice: UserService,
-    private router: Router,
-    public toastController: ToastController,
-    public loading: LoadingController,
-    public dataService: DataService,
-    private network: Network,
+  constructor(private userservice: UserService, private router: Router,
+    public toastController: ToastController, public loading: LoadingController,
+    public dataService: DataService, private network: Network,
     private dialogs: Dialogs) {
 
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
@@ -53,37 +50,39 @@ export class LoginPage implements OnInit {
     connectSubscription.unsubscribe();
   }
 
-  user: Login = new Login();
-  ind: User = new User();
+  login: Login = new Login();
+  user: User = new User();
   public errorMsg;
 
   ngOnInit() {
   }
 
   onLogin() {
-    console.log(this.user);
-    this.userservice.loginUsers(this.user).subscribe(
+    console.log(this.login);
+    this.userservice.loginUsers(this.login).subscribe(
       res => {
         console.log(res);
-        this.ind = res['user'];
-        console.log(this.ind)
         if (res['message'] == 'user') {
           this.loading.create({
             duration: 300
           }).then(loading => loading.present());
-          const data = res['user'];
-          sessionStorage.setItem('token', res.access_token);
-          sessionStorage.setItem('id', data.id)
-          sessionStorage.setItem('username', this.ind.username);
+          this.user = res['user'];
+          this.dataService.setName(this.user.username);
+          this.dataService.setToken(res.access_token);
+          this.dataService.setID(this.user.id);
+          sessionStorage.setItem('id', String(this.user.id))
+          sessionStorage.setItem('token', res.access_token)
+          sessionStorage.setItem('username', this.user.username)
           this.router.navigate(['/user']);
         } else if (res['message'] == 'staff') {
           this.loading.create({
             duration: 300
           }).then(loading => loading.present());
           const data = res['user'];
+          this.dataService.setToken(res.access_token);
           sessionStorage.setItem('token', res.access_token);
           sessionStorage.setItem('id', data.id)
-          sessionStorage.setItem('username', this.ind.username);
+          sessionStorage.setItem('username', data.username);
           this.router.navigate(['/staff']);
         }
         else {

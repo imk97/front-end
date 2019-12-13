@@ -6,6 +6,7 @@ import { BookService } from 'src/app/service/book.service';
 import { StaffService } from 'src/app/service/staff.service';
 import { DataService } from 'src/app/service/data.service';
 import { GlobalService } from 'src/app/global.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-home',
@@ -13,27 +14,27 @@ import { GlobalService } from 'src/app/global.service';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage implements OnInit {
+export class HomePage {
 
-  username: any;
-  user: string;
-  induser: User = new User();
+  username: string;
+  data: User = new User();
   book = [];
 
-  constructor(
+  constructor
+  ( 
     public route: ActivatedRoute,
     public router: Router, private toast: ToastController,
     private menu: MenuController, private alert: AlertController,
     private global: GlobalService, private action: ActionSheetController,
     private bookservice: BookService, private staffservice: StaffService,
-    private dataservice: DataService
-  ) {
+    private dataservice: DataService, private userservice: UserService
+  ) {  }
 
-  }
-
-  ngOnInit() {
+  ionViewWillEnter() {
     this.menu.enable(true)
     this.getData();
+    this.getUsername();
+    //this.getUsername();
     /*if(this.route.snapshot.data['special']) {
       this.data = this.route.snapshot.data['special'];
       console.log(this.data);
@@ -41,18 +42,21 @@ export class HomePage implements OnInit {
   }
 
   doRefresh(event) {
-    setTimeout( () => { this.getData(); event.target.complete() }, 200)
+    setTimeout(() => { this.getData(); event.target.complete() }, 200)
+  }
+
+  getUsername() {
+    this.userservice.getUsersById(Number(sessionStorage.getItem('id'))).subscribe(res => {
+      this.data = res['user'][0]
+      this.username = this.data.username
+    })
   }
 
   getData() {
-    this.user = sessionStorage.getItem('username');
-    this.bookservice.listbyid(
-      Number(sessionStorage.getItem('id'))).subscribe(
-        res => {
-          this.book = res['book'] as []
-          console.log(this.book)
-        }
-      )
+    this.bookservice.listbyid( Number(sessionStorage.getItem('id'))).subscribe(res => {
+        this.book = res['book'] as []
+        console.log(this.book)
+      })
   }
 
   removeToken() {
@@ -111,7 +115,7 @@ export class HomePage implements OnInit {
                             }).then(res => res.present())
                           }
                         })
-                      //setInterval(() => { this.getData(); }, 4000)
+                      setTimeout(() => { this.getData() }, 200)
                     }
                   }
                 ]

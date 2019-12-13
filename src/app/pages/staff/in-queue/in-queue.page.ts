@@ -15,16 +15,16 @@ import { Router } from '@angular/router';
 export class InQueuePage implements OnInit {
 
   scannedCode = null;
-  estTime : EstTime = new EstTime();
+  estTime: EstTime = new EstTime();
 
   constructor
-  (
-    private barcodeScanner: BarcodeScanner,
-    private http: HttpClient,
-    public global: GlobalService,
-    private toast: ToastController,
-    private router: Router
-  ) { }
+    (
+      private barcodeScanner: BarcodeScanner,
+      private http: HttpClient,
+      public global: GlobalService,
+      private toast: ToastController,
+      private router: Router
+    ) { }
 
   ngOnInit() {
     this.scanCode();
@@ -43,40 +43,46 @@ export class InQueuePage implements OnInit {
     console.log(JSON.stringify(this.estTime['time']))
     let today = new Date()
     this.http.post(this.global.url + '/service', {
-      'u_id': sessionStorage.getItem('id'),
+      's_id': sessionStorage.getItem('id'),
       'type': 'in-queue',
       'start_time': today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(),
       'estimation_time': this.estTime['time'],
       'b_plateNum': this.scannedCode['text']
-    }, this.global.httpOptions).subscribe(
-      res => {
-        if(res['0'] == '201') {
-          this.toast.create(
-            {
-              message: res['message'],
-              buttons: [
-                {
-                  text: 'Okay',
-                  handler: () => { this.router.navigate(['/staff']) }
-                }
-              ]
-            }
-          ).then(toast => toast.present())
-        } else {
-          this.toast.create(
-            {
-              message: res['message'],
-              buttons: [
-                {
-                  text: 'Scan',
-                  handler: () => { this.scanCode() }
-                }
-              ]
-            }
-          ).then(toast => toast.present())
+    },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.global.token()}`
+        })
+      }).subscribe(
+        res => {
+          if (res['0'] == '201') {
+            this.toast.create(
+              {
+                message: res['message'],
+                buttons: [
+                  {
+                    text: 'Okay',
+                    handler: () => { this.router.navigate(['/staff']) }
+                  }
+                ]
+              }
+            ).then(toast => toast.present())
+          } else {
+            this.toast.create(
+              {
+                message: res['message'],
+                buttons: [
+                  {
+                    text: 'Scan',
+                    handler: () => { this.scanCode() }
+                  }
+                ]
+              }
+            ).then(toast => toast.present())
+          }
         }
-      }
-    )
+      )
   }
 
 }

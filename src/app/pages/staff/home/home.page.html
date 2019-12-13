@@ -7,17 +7,23 @@
 <div class="alert alert-success">Welcome to the MCSM, {{ username }}</div>
 <ion-content [scrollEvents]="true">
   <ion-item>
-    <ion-label (click)="inqueue()">In-Queue</ion-label>
+    <ion-label (click)="assignservice()">Assign Service</ion-label>
   </ion-item><br>
   <ion-item>
     <ion-label (click)="inservice()">In-service</ion-label>
   </ion-item><br>
   <ion-item>
-    <ion-label>Quality Control</ion-label>
+    <ion-label (click)="model()">Model</ion-label>
+  </ion-item><br>
+  <ion-item>
+    <ion-label (click)="item()">Item</ion-label>
+  </ion-item>
+  <!--<ion-item>
+    <ion-label (click)="qualitycontrol()">Quality Control</ion-label>
   </ion-item><br>
   <ion-item>
     <ion-label>Payment</ion-label>
-  </ion-item>
+  </ion-item>-->
 </ion-content>
 
 <ion-footer>

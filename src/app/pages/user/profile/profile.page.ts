@@ -11,8 +11,7 @@ import { GlobalService } from 'src/app/global.service';
 })
 export class ProfilePage implements OnInit {
 
-  constructor( private userservice: UserService, private router: Router, private global: GlobalService
-  ) { }
+  constructor( private userservice: UserService, private router: Router, private global: GlobalService ) { }
 
   user: User = new User();
   ngOnInit() {

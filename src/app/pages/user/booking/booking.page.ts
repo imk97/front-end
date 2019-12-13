@@ -1,30 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/class/book';
 import { BookService } from 'src/app/service/book.service';
-import { ToastController, AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, Platform, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GlobalService } from 'src/app/global.service';
 
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.page.html',
   styleUrls: ['./booking.page.scss'],
 })
-export class BookingPage implements OnInit {
-
-  constructor(private bookservice: BookService,
-    private alertController: AlertController,
-    private router: Router,
-    private menu: MenuController) { }
+export class BookingPage {
 
   book: Book = new Book();
   encodeData: any;
+  currentYear: any;
+  currentMonth: any;
+  time: [];
+  getDate: Boolean = true;
+  model: string[] = [];
+  Item: string[] = [];
 
-  ngOnInit() {
+  intervals: any[] = [
+    '1,000km'
+  ]
+
+  Time: any[] = [
+    '09:00',
+    '10:00'
+  ]
+
+  
+  constructor(private bookservice: BookService, private alertController: AlertController,
+    private router: Router, private menu: MenuController, public modalCtrl: ModalController, private http: HttpClient, public global: GlobalService) { }
+
+  ionViewWillEnter() {
     this.menu.enable(true)
+    this.getModel()
     this.book.user_id = Number(sessionStorage.getItem('id'))
+    this.currentYear = new Date().getFullYear();
   }
+
 
   onSave() {
     console.log(this.book)
@@ -39,8 +56,40 @@ export class BookingPage implements OnInit {
             }
           }
         ]
-      }).then(res => {res.present()})
+      }).then(res => { res.present() })
     )
   }
+
+  availableHours() {
+    console.log(this.book.date)
+    this.http.post(this.global.url + '/availableHours', {
+      "date": this.book.date,
+    }, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` })
+    }).subscribe(
+      res => {
+        console.log(!!res['availableHours'])
+        this.getDate = false
+        this.time = res['availableHours']
+      } 
+    );
+  }
+
+  getModel() {
+    this.http.get(this.global.url+'/list', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).subscribe( res => { 
+      const models = res['model'] 
+      for( var i=0 ;i < models.length; i++) {
+        this.model.push(models[i].name)
+      }
+    })
+  }
+  
+
+
 
 }

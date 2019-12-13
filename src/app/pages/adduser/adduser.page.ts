@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../class/user';
 import { UserService } from '../../service/user.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ToastController  } from '@ionic/angular';
+import { ToastController, AlertController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class AdduserPage implements OnInit {
 
-  constructor(private userservice: UserService, public toastController: ToastController,
-    public router: Router ) { }
+  constructor(private userservice: UserService, public toastController: ToastController, public router: Router,
+    private alert: AlertController ) { }
 
   roles: any = [
     'user',
@@ -28,14 +28,30 @@ export class AdduserPage implements OnInit {
   users: User;
 
   onSave(): void {
+    this.user.role = 1;
     console.log(this.user)
-    this.userservice.addUser(this.user).subscribe(
-      data => this.toastController.create({
-        color: 'dark',
-        message: data['message'],
-        duration: 2000
-      }).then(toast => toast.present() )
-    );
-    this.router.navigate(['/login'])
+    this.userservice.addUser(this.user).subscribe(res => { console.log(res['message'])
+      if(res['message'] != 'Successfully saved') {
+        this.alert.create({
+          message: res['message'],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => { this.router.navigate(['/add']) }
+            }
+          ]
+        }).then(res => res.present());
+      } else {
+        this.alert.create({
+          message: res['message'],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => { this.router.navigate(['/login']) }
+            }
+          ]
+        }).then(res => res.present());
+      }
+    });
   }
 }

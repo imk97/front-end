@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Car Model</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <form (ngSubmit)="onSave()" #modelForm="ngForm">
+    <ion-item>
+      <ion-label>Model :</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" required></ion-input>
+    </ion-item>
+    <!--<ion-item>
+      <ion-label>Interval :</ion-label>
+      <ion-input type="text" name="interval" [(ngModel)]="modelInterval.interval" #interval="ngModel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item :</ion-label>
+      <ion-input type="text" name="item1" [(ngModel)]="modelInterval.item1" #item1="ngModel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item :</ion-label>
+      <ion-input type="text" name="item2" [(ngModel)]="modelInterval.item2" #item2="ngModel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item :</ion-label>
+      <ion-input type="text" name="item3" [(ngModel)]="modelInterval.item3" #item3="ngModel"></ion-input>
+    </ion-item>-->
+    <br>
+    <ion-button type="submit" expand="block" [disabled]="!modelForm.valid">Save</ion-button>
+  </form>
+</ion-content>

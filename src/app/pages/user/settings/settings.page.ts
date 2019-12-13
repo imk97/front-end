@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/global.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -9,7 +10,7 @@ import { GlobalService } from 'src/app/global.service';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(private router: Router, private global: GlobalService) { }
+  constructor(private router: Router, private global: GlobalService, private alert: AlertController) { }
 
   ngOnInit() {
   }
@@ -23,7 +24,21 @@ export class SettingsPage implements OnInit {
   }
 
   logout() {
-    this.global.logout();
-    this.router.navigate(['/login']);
+    this.alert.create({
+      message: 'Are you sure to sign out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => { }
+        },
+        {
+          text: 'Yes',
+          handler: () => {     
+            this.global.logout();
+            this.router.navigate(['/login']); 
+          }
+        }
+      ]
+    }).then(res => res.present());
   }
 }

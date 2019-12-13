@@ -14,9 +14,7 @@ export class BookService {
   private handleError: HandleError;
   private book = [];
   //url: string = 'http://192.168.0.112:8000/api';
-  constructor(private http: HttpClient,
-    httpErrorHandler: HttpErrorHandler,
-    public global: GlobalService) {
+  constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler, public global: GlobalService) {
     this.handleError = httpErrorHandler.createHandleError('BookService');
   }
 
@@ -37,8 +35,9 @@ export class BookService {
       );
   }
 
-  list(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.global.url + '/books',
+  list(date: string): Observable<Book[]> {
+    const nurl = `${this.global.url+'/date'}/${date}`
+    return this.http.get<Book[]>(nurl,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -70,5 +69,14 @@ export class BookService {
         'Authorization':  `Bearer ${this.global.token()}`
       })
     }).pipe(catchError(this.handleError('deletebyplateNo')))
+  }
+
+  availableHours(): Observable<{}> {
+    return this.http.get(this.global.url+'/availableHours', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).pipe(catchError(this.handleError('availableHours')))
   }
 }

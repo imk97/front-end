@@ -7,3 +7,7 @@ ion-button {
 .action-sheet-group {
     overflow: auto !important;
 }
+
+ion-content {
+    --padding-top: 5px;
+}

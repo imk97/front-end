@@ -8,10 +8,13 @@
 </ion-header>
 
 <ion-content>
-  <ngx-qrcode 
+  <ngx-qrcode class="text-center"
     [qrc-element-type]="elementType" 
     [qrc-value]="qrData" 
-    qrc-class="test-class" 
-    qrc-errorCorrectionLevel = "L">
+    
+    qrc-errorCorrectionLevel = "L"
+    width="90%">
   </ngx-qrcode>
+
+  <h5 class="text-center">{{ qrData }}</h5>
 </ion-content>

@@ -4,6 +4,7 @@ import { MenuController, AlertController, ActionSheetController } from '@ionic/a
 import { Router } from '@angular/router';
 import { queue } from 'rxjs/internal/scheduler/queue';
 import { GlobalService } from 'src/app/global.service';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +13,9 @@ import { GlobalService } from 'src/app/global.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(
-    private userservice: UserService,
-    private alert: AlertController,
-    private action: ActionSheetController,
-    private router: Router,
-    private global: GlobalService
-  ) { }
+  constructor(private userservice: UserService, private alert: AlertController,
+    private action: ActionSheetController, private router: Router, private dataservice: DataService,
+    private global: GlobalService) { }
 
   username: any;
 
@@ -30,15 +27,9 @@ export class HomePage implements OnInit {
     this.action.create({
       buttons: [
         {
-          text: 'Home',
-          handler: () => {
-            console.log('home')
-          }
-        },
-        {
           text: 'User Access',
           handler: () => {
-            this.router.navigate(['/user/home'])
+            this.router.navigate(['/user'])
           }
         },
         {
@@ -51,31 +42,26 @@ export class HomePage implements OnInit {
     }).then(res => { res.present() })
   }
 
-  inqueue() {
-    this.action.create({
-      buttons: [
-        {
-          text: 'QR Code',
-          handler: () => {
-            this.router.navigate(['/listbooking'])
-          }
-        },
-        {
-          text: 'Scan',
-          handler: () => {
-            this.router.navigate(['/in-queue'])
-          }
-        }
-      ]
-    }).then(res => { res.present() })
+  assignservice() {
+    //sessionStorage.setItem('service','1')
+    this.dataservice.setService(1);
+    this.router.navigate(['/listbooking'])
   }
 
   inservice() {
     this.action.create({
       buttons: [
         {
+          text: 'View',
+          handler: () => {
+            this.dataservice.setService(2)
+            this.router.navigate(['/listbooking'])
+          }
+        },
+        {
           text: 'QR Code',
           handler: () => {
+            this.dataservice.setService(0);
             this.router.navigate(['/listbooking'])
           }
         },
@@ -89,7 +75,45 @@ export class HomePage implements OnInit {
     }).then(res => { res.present() })
   }
 
+  model() {
+    this.action.create({
+      buttons: [
+        {
+          text: 'Add',
+          handler: () => { this.router.navigate(['/model-interval']) }
+        },
+        /*{
+          text: 'View/Delete',
+          handler: () => { this.router.navigate(['/']) }
+        }*/
+      ]
+    }).then(res => { res.present() })
+  }
 
+  item() {
+    this.action.create({
+      buttons: [
+        {
+          text: 'Add',
+          handler: () => { this.router.navigate(['/item']) }
+        }
+      ]
+    }).then(res => { res.present() })
+  }
+  /*qualitycontrol() {
+    this.action.create({
+      buttons: [
+        {
+          text: 'QR Code',
+          handler: () => { this.router.navigate(['/listbooking']) }
+        },
+        {
+          text: 'Scan',
+          handler: () => { this.router.navigate(['/qualitycontrol']) }
+        }
+      ]
+    }).then(res => {res.present() })
+  }*/
 
   logout() {
     this.alert.create({

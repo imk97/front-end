@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Assign Service</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <ion-item>
+    <ion-label>Car Model :</ion-label>
+    <ion-select interface="alert" multiple="false" name="model" [(ngModel)]="model" (ionChange)="listitem()">
+      <ion-select-option *ngFor="let model of listModel">{{ model.name }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <form [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-list>
+      <ion-item formArrayName="items" *ngFor="let item of form.controls.items.controls; let i = index">
+        <ion-checkbox slot="end" [formControlName]="i"></ion-checkbox>
+        {{ itemsData[i].item }}
+      </ion-item>
+    </ion-list>
+
+    <!--<ion-item>
+      <ion-label>Milleage :</ion-label>
+      <ion-input type="text" name="milleage" [(ngModel)]="milleage" placeholder="9,999km"></ion-input>
+    </ion-item>-->
+    <ion-button type="submit" expand="block">Search</ion-button>
+  </form>
+</ion-content>
