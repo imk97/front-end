@@ -22,10 +22,10 @@ export class ListbookingPage implements OnInit {
   scan = null;
   today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   public date: string;
-  public searchdate: string;
+  public searchcar: string;
 
   constructor(private bookservice: BookService, private barcodeScanner: BarcodeScanner, private http: HttpClient, public global: GlobalService, private userservice: UserService,
-    private dataservice: DataService, private router: Router, private alert: AlertController, private loading: LoadingController) {  }
+    private dataservice: DataService, private router: Router, private alert: AlertController, private loading: LoadingController) { }
 
   ngOnInit() {
     this.listBook();
@@ -44,21 +44,36 @@ export class ListbookingPage implements OnInit {
   }
 
   search(): void {
-    console.log(this.searchdate)
-    this.bookservice.list(this.searchdate).subscribe(
-      bookings => {
+    /*console.log(this.searchcar)
+    const nurl = `${this.global.url + '/searchcar'}`
+    this.http.post(nurl, {
+      'plateNum': this.searchcar,
+      'date': this.today
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).subscribe(
+      res => {
         //this.bookings = bookings['date']
-        console.log(this.bookings)
+        //console.log(res['message'])
         this.loading.create({
           message: 'Please wait',
           duration: 500,
           spinner: 'crescent'
-        }).then( res => {
-          this.bookings = bookings['date']
+        }).then(res => {
           res.present()
+          const data = res['message']
+          this.bookings = []
+          for(var i=0; i<data.length;i++)
+          {
+            this.bookings.push(data[i])
+          }
+          res.dismiss()
         });
       }
-    )
+    )*/
   }
 
   getPlateNum(plateNum: string): void {
@@ -66,8 +81,10 @@ export class ListbookingPage implements OnInit {
     console.log(this.dataservice.getService())
     if (this.dataservice.getService() == 1) {
       this.router.navigate(['/assignservice'])
-    } else if(this.dataservice.getService() == 2) {
+    } else if (this.dataservice.getService() == 2) {
       this.router.navigate(['/view-service'])
+    } else if (this.dataservice.getService() == 3) {
+      this.router.navigate(['/update-service'])
     } else {
       this.router.navigate(['/qrcode'])
     }

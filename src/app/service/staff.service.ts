@@ -5,7 +5,7 @@ import { GlobalService } from '../global.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
-import { ModelInterval } from 'src/app/class/model-interval';
+import { Item } from 'src/app/class/item';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class StaffService {
   private handleError: HandleError;
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler, public global: GlobalService, private userservice: UserService) { this.handleError = httpErrorHandler.createHandleError('StaffService'); }
 
-  storeService(model: ModelInterval): Observable<ModelInterval> {
-    return this.http.post<ModelInterval>(this.global.url + '/item', model, {
+  storeService(model: Item): Observable<Item> {
+    return this.http.post<Item>(this.global.url + '/item', model, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.global.token()}`
@@ -24,8 +24,8 @@ export class StaffService {
     }).pipe(catchError(this.handleError('modelInterval', model)))
   }
 
-  listCar(): Observable<ModelInterval[]> {
-    return this.http.get<ModelInterval[]>(this.global.url+'/list', {
+  listCar(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.global.url+'/list', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.global.token()}`

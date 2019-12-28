@@ -5,14 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InServicePage } from './in-service.page';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { HomePage } from './home.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 const routes: Routes = [
   {
     path: '',
-    component: InServicePage
+    component: HomePage
   }
 ];
 
@@ -24,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InServicePage]
+  declarations: [HomePage]
 })
-export class InServicePageModule {}
+export class HomePageModule {}

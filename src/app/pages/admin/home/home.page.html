@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <ion-list>
+    <ion-item (click)="user()">User</ion-item>
+    <ion-item (click)="staff()">Staff</ion-item>
+    <ion-button type="submit" expand="block" (click)="onhide()">Hide</ion-button>
+  </ion-list>
+
+  <ion-searchbar name="searchuser" [(ngModel)]="searchuser" [hidden]="hide"></ion-searchbar>
+  
+  <ion-list *ngFor="let user of users | filter: searchuser" [hidden]="hide">
+    <ion-item>Name :
+      {{ user.name }}
+    </ion-item>
+    <ion-item>IC :
+      {{ user.ic }}
+    </ion-item>
+    <ion-button type="submit" size="small" float-right (click)="onAssign(user.id)">Assign</ion-button>
+  </ion-list>
+</ion-content>

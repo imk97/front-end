@@ -1,29 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InServicePage } from './in-service.page';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { ListItemPage } from './list-item.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: InServicePage
+    component: ListItemPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    Ng2SearchPipeModule,
+    ReactiveFormsModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InServicePage]
+  declarations: [ListItemPage]
 })
-export class InServicePageModule {}
+export class ListItemPageModule {}

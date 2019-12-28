@@ -5,14 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InServicePage } from './in-service.page';
+import { UpdateModelPage } from './update-model.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
 
 const routes: Routes = [
   {
     path: '',
-    component: InServicePage
+    component: UpdateModelPage
   }
 ];
 
@@ -24,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InServicePage]
+  declarations: [UpdateModelPage]
 })
-export class InServicePageModule {}
+export class UpdateModelPageModule {}

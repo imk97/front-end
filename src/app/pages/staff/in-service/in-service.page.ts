@@ -21,73 +21,90 @@ export class InServicePage implements OnInit {
 
   scannedCode = null;
   estTime: EstTime = new EstTime();
-  item: any;
-  public model: string;
-  public milleage: string;
-  private service: string;
-  items: string[] = [];
-  data: any;
-  today = new Date()
+  public items: string;
+  public service: string
+
+  //items: string[] = [];
+  data = [];
+  today = new Date();
+  certain: any;
+  progress: boolean = true
+
 
   ngOnInit() {
     this.scanCode();
   }
 
   scanCode() {
-    const nurl = `${this.global.url + '/services'}`;
+    this.barcodeScanner.scan().then(
+      barcode => {
+        this.scannedCode = barcode
+        const nurl = `${this.global.url + '/services'}`;
+        this.http.post(nurl, {
+          'plateNum': this.scannedCode['text'],
+          'date': formatDate('2019-12-23', 'yyyy-MM-dd', 'en')
+        }, {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.global.token()}`
+          })
+        }).subscribe(res => {
+          this.data = res['message']
+          console.log(this.data)
+        });
+      }
+    )
+  }
+
+  start(item: string, proc: string) {
+    const nurl = `${this.global.url + '/process'}`;
     this.http.post(nurl, {
-      'plateNum' : 'JHR3801',
-      'date': formatDate(this.today,'yyyy-MM-dd', 'en')
+      'item': item
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.global.token()}`
       })
     }).subscribe(res => {
-      this.data = res['message']
-    });
-  }
-    /*
-    this.barcodeScanner.scan().then(
-      barcode => {
-        this.scannedCode = barcode
-        console.log(this.scannedCode['text'])
-        let scan = this.scannedCode['text']
-        const nurl = `${this.global.url + '/search'}/${this.scannedCode['text']}`;
-        this.http.get(nurl, {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.global.token()}`
-          })
-        }).subscribe(res => {
-          const data = res['items']
-          for (var i = 0; i < data.length; i++) {
-            this.items.push(data[i].item)
-            //this.item[i] = data[i].item
-          }
-        });
-      }
-    )*/
-
-  option() {
-    this.action.create({
-      buttons: [
-        {
-          text: 'Start',
-          handler: () => { 
-            console.log("start")
-            this.dataservice.setOption("start") 
-          }
-        },
-        {
-          text: 'Stop',
-          handler: () => { 
-            console.log("end") 
-          }
+      console.log(res)
+      let it = res['item']
+      for (var i = 0; i < this.data.length; i++) {
+        if (it == this.data[i]) {
+          this.certain = it;
+          console.log(this.certain)
+          //this.dataservice.setOption(this.certain)
         }
-      ]
-    }).then(res => { res.present() });
+      }
+    })
+    //this.dataservice.setOption(item)
+    //this.progressbar()
+    /*for(var i = 0; i < this.data.length; i++) {
+      if(item == this.data[i]) {
+        this.certain = item;
+        console.log(this.certain)
+      }
+    }*/
   }
+
+  progressbar() {
+    let item = this.dataservice.getOption()
+    for (var i = 0; i < this.data.length; i++) {
+      if (item == this.data[i]) {
+        this.certain = item;
+        console.log(this.certain)
+      }
+    }
+  }
+
+
+  /*end(item: string) {
+    for(var i = 0; i < this.data.length; i++) {
+      if(item == this.data[i]) {
+        console.log(item)
+        this.certain = item
+      }
+    }
+  }*/
 
   save() {
     let today = new Date()
@@ -96,7 +113,7 @@ export class InServicePage implements OnInit {
       'b_plateNum': 'JHR3801',
       'type': this.service,
       'time': today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(),
-      'date': formatDate(today,'yyyy-MM-dd', 'en')
+      'date': formatDate(today, 'yyyy-MM-dd', 'en')
     },
       {
         headers: new HttpHeaders({

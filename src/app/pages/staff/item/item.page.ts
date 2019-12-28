@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffService } from 'src/app/service/staff.service';
-import { ModelInterval } from 'src/app/class/model-interval';
+import { Item } from 'src/app/class/item';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalService } from 'src/app/global.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-item',
@@ -13,9 +13,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class ItemPage {
 
-  modelinterval: ModelInterval = new ModelInterval();
+  modelinterval: Item = new Item();
   models: any;
-  constructor(private staffservice: StaffService, private http: HttpClient, private global: GlobalService,private router: Router, private alert: AlertController) { }
+  constructor(private staffservice: StaffService, private http: HttpClient, private global: GlobalService, private router: Router, private toast: ToastController) { }
 
   ionViewWillEnter() {
     this.listModel();
@@ -23,19 +23,27 @@ export class ItemPage {
 
   onSave() {
     console.log(this.modelinterval)
-    this.staffservice.storeService(this.modelinterval).subscribe(res => { 
-      if(res['message'] == 'Save failed!') {
-        this.alert.create({
+    this.staffservice.storeService(this.modelinterval).subscribe(res => {
+      if (res['message'] == 'Save failed!') {
+        this.toast.create({
           message: res['message'],
           buttons: [
             {
-              text: 'OK',
-              handler: () => { this.router.navigate(['/item']) }
+              text: 'Close',
+              handler: () => { res => res.dismiss(); this.router.navigate(['/item']) }
             }
           ]
-        }).then( res => res.present());
+        }).then(res => res.present());
       } else {
-        this.router.navigate(['/staff'])
+        this.toast.create({
+          message: res['message'],
+          buttons: [
+            {
+              text: 'Close',
+              handler: () => { res => res.dismiss(); this.router.navigate(['/staff']) }
+            }
+          ]
+        }).then(res => { res.present() })
       }
     });
   }

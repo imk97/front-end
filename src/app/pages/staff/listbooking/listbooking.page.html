@@ -4,13 +4,12 @@
       <ion-back-button text="" color="light"></ion-back-button>
     </ion-buttons>
     <ion-title>List cars</ion-title>
-    <ion-searchbar name="searchdate" [(ngModel)]="searchdate" (ionBlur)="search()" placeholder="YYYY-MM-DD"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-  <h5 class="text-center">List Cars</h5>
-  <ion-list *ngFor="let book of bookings">
+  <ion-searchbar name="searchcar" [(ngModel)]="searchcar"></ion-searchbar>
+  <ion-list *ngFor="let book of bookings | filter:searchcar">
     <ion-item (click)="getPlateNum(book.plateNum)">
       <ion-label class="text-center">{{ book.plateNum }}</ion-label>
     </ion-item>

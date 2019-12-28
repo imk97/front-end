@@ -93,6 +93,10 @@ const routes: Routes = [
   { path: 'model-interval', loadChildren: './pages/staff/model-interval/model-interval.module#ModelIntervalPageModule' },
   { path: 'item', loadChildren: './pages/staff/item/item.module#ItemPageModule' },
   { path: 'view-service', loadChildren: './pages/staff/view-service/view-service.module#ViewServicePageModule' },
+  { path: 'list-item', loadChildren: './pages/staff/list-item/list-item.module#ListItemPageModule' },
+  { path: 'update-service', loadChildren: './pages/staff/update-service/update-service.module#UpdateServicePageModule' },
+  { path: 'update-model', loadChildren: './pages/staff/update-model/update-model.module#UpdateModelPageModule' },
+  { path: 'admin', loadChildren: './pages/admin/home/home.module#HomePageModule' },
   
 
 ];

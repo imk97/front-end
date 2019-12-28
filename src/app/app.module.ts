@@ -23,6 +23,7 @@ import { LoginPageModule } from './pages/login/login.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
+
 //import { PasswordPageModule } from './pages/user/password/password.module';
 
 @NgModule({

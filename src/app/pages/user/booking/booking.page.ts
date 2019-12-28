@@ -21,16 +21,11 @@ export class BookingPage {
   getDate: Boolean = true;
   model: string[] = [];
   Item: string[] = [];
+  Time : number;
 
   intervals: any[] = [
     '1,000km'
   ]
-
-  Time: any[] = [
-    '09:00',
-    '10:00'
-  ]
-
   
   constructor(private bookservice: BookService, private alertController: AlertController,
     private router: Router, private menu: MenuController, public modalCtrl: ModalController, private http: HttpClient, public global: GlobalService) { }
@@ -68,9 +63,8 @@ export class BookingPage {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` })
     }).subscribe(
       res => {
-        console.log(!!res['availableHours'])
-        this.getDate = false
-        this.time = res['availableHours']
+        console.log(res['availableHours'])
+        this.Time = res['availableHours']
       } 
     );
   }

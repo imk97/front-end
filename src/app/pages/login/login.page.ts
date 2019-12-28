@@ -84,6 +84,18 @@ export class LoginPage implements OnInit {
           sessionStorage.setItem('id', data.id)
           sessionStorage.setItem('username', data.username);
           this.router.navigate(['/staff']);
+        } else if (res['message'] == 'admin') {
+          this.loading.create({
+            duration: 300
+          }).then(loading => {
+            loading.present();
+            const data = res['user']
+            this.dataService.setToken(res.access_token)
+            sessionStorage.setItem('token', res.access_token)
+            sessionStorage.setItem('id', data.id)
+            sessionStorage.setItem('username', data.username)
+            this.router.navigate(['/admin'])
+          })
         }
         else {
           this.toastController.create({

@@ -1,29 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InServicePage } from './in-service.page';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { UpdateServicePage } from './update-service.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: InServicePage
+    component: UpdateServicePage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    Ng2SearchPipeModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InServicePage]
+  declarations: [UpdateServicePage]
 })
-export class InServicePageModule {}
+export class UpdateServicePageModule {}

@@ -2,8 +2,13 @@ ion-content {
     --padding-top: 10px;
 }
 
+ion-input {
+    --padding-left: 10px;
+}
+
 ion-button {
     --background: #3171e0;
     --color: #ffffff;
-    --border-radius: 5px;
+    --border-radius: 10px;
+    --background-hover: 10px;
 }

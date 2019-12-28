@@ -43,9 +43,25 @@ export class HomePage implements OnInit {
   }
 
   assignservice() {
+    this.action.create({
+      buttons: [
+        {
+          text: 'Edit/Update',
+          handler: () => {
+            this.dataservice.setService(3)
+            this.router.navigate(['/listbooking'])
+          }
+        },
+        {
+          text: 'Assign',
+          handler: () => {
+            this.dataservice.setService(1);
+            this.router.navigate(['/listbooking'])
+          }
+        }
+      ]
+    }).then(res => { res.present() })
     //sessionStorage.setItem('service','1')
-    this.dataservice.setService(1);
-    this.router.navigate(['/listbooking'])
   }
 
   inservice() {
@@ -61,7 +77,7 @@ export class HomePage implements OnInit {
         {
           text: 'QR Code',
           handler: () => {
-            this.dataservice.setService(0);
+            this.dataservice.setService(4);
             this.router.navigate(['/listbooking'])
           }
         },
@@ -82,10 +98,10 @@ export class HomePage implements OnInit {
           text: 'Add',
           handler: () => { this.router.navigate(['/model-interval']) }
         },
-        /*{
+        {
           text: 'View/Delete',
-          handler: () => { this.router.navigate(['/']) }
-        }*/
+          handler: () => { this.router.navigate(['/update-model']) }
+        }
       ]
     }).then(res => { res.present() })
   }
@@ -96,24 +112,14 @@ export class HomePage implements OnInit {
         {
           text: 'Add',
           handler: () => { this.router.navigate(['/item']) }
+        },
+        {
+          text: 'list',
+          handler: () => { this.router.navigate(['/list-item']) }
         }
       ]
     }).then(res => { res.present() })
   }
-  /*qualitycontrol() {
-    this.action.create({
-      buttons: [
-        {
-          text: 'QR Code',
-          handler: () => { this.router.navigate(['/listbooking']) }
-        },
-        {
-          text: 'Scan',
-          handler: () => { this.router.navigate(['/qualitycontrol']) }
-        }
-      ]
-    }).then(res => {res.present() })
-  }*/
 
   logout() {
     this.alert.create({
