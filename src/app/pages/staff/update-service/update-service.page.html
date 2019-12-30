@@ -15,7 +15,7 @@
     </ion-select>
   </ion-item>
   <form [formGroup]="form">
-    <ion-list formArrayName="items" *ngFor="let item of form.controls.items.controls; let i = index">
+    <ion-list formArrayName="items" *ngFor="let item of form.get('items'); let i = index">
       <ion-item>
         <ion-checkbox slot="end" [formControlName]="i"></ion-checkbox>
         {{ itemsData[i].item }}

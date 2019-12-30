@@ -28,13 +28,12 @@ export class ViewBookingPage implements OnInit {
 
   ngOnInit() {
     this.getservice();
-    this.progressbar()
   }
 
   getservice() {
     this.http.post(this.global.url+'/services', {
       'plateNum' : this.dataservice.getPlateNum(),
-      'date': formatDate('2019-12-23','yyyy-MM-dd', 'en')
+      'date': formatDate(this.today,'yyyy-MM-dd', 'en')
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'applicaiton/json',
@@ -47,6 +46,13 @@ export class ViewBookingPage implements OnInit {
           this.data = res['message']
           //this.progress = !!this.dataservice.getOption()
           console.log(this.data)
+          const nurl = `${this.global.url+'/get'}`
+          this.http.get(nurl, {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${this.global.token()}`
+            })
+          }).subscribe(res => { this.certain = res['item']; this.progress = false })
           
         } else {
           this.alert.create({

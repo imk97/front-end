@@ -28,7 +28,8 @@ export class InServicePage implements OnInit {
   data = [];
   today = new Date();
   certain: any;
-  progress: boolean = true
+  starter: boolean = true
+  stoper: boolean = true
 
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class InServicePage implements OnInit {
         const nurl = `${this.global.url + '/services'}`;
         this.http.post(nurl, {
           'plateNum': this.scannedCode['text'],
-          'date': formatDate('2019-12-23', 'yyyy-MM-dd', 'en')
+          'date': formatDate(this.today, 'yyyy-MM-dd', 'en')
         }, {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -56,25 +57,35 @@ export class InServicePage implements OnInit {
     )
   }
 
-  start(item: string, proc: string) {
-    const nurl = `${this.global.url + '/process'}`;
+  status(item: string,status: string) {
+    console.log(status)
+    const nurl = `${this.global.url + '/set'}`;
     this.http.post(nurl, {
-      'item': item
+      'item': item,
+      'status': status
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.global.token()}`
       })
     }).subscribe(res => {
-      console.log(res)
-      let it = res['item']
-      for (var i = 0; i < this.data.length; i++) {
-        if (it == this.data[i]) {
-          this.certain = it;
-          console.log(this.certain)
-          //this.dataservice.setOption(this.certain)
+      const nurl = `${this.global.url + '/get'}`;
+      this.http.get(nurl, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.global.token()}`
+        })
+      }).subscribe(res => { 
+        if(res['status'] == 'start') {
+          this.certain = res['item']; 
+          this.starter = false
+          this.stoper = true 
+        } else {
+          this.certain = res['item'];
+          this.stoper = false
+          this.starter = true
         }
-      }
+      })
     })
     //this.dataservice.setOption(item)
     //this.progressbar()
@@ -86,25 +97,21 @@ export class InServicePage implements OnInit {
     }*/
   }
 
-  progressbar() {
-    let item = this.dataservice.getOption()
-    for (var i = 0; i < this.data.length; i++) {
-      if (item == this.data[i]) {
-        this.certain = item;
-        console.log(this.certain)
+  end(item: string) {
+    const nurl = `${this.global.url + '/delete'}`;
+    this.http.get(nurl, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.global.token()}`
+      })
+    }).subscribe(res => {
+      if(res['item'] == 'delete') {
+        this.starter = false
+        this.certain = res['item']
       }
-    }
+      
+    })
   }
-
-
-  /*end(item: string) {
-    for(var i = 0; i < this.data.length; i++) {
-      if(item == this.data[i]) {
-        console.log(item)
-        this.certain = item
-      }
-    }
-  }*/
 
   save() {
     let today = new Date()

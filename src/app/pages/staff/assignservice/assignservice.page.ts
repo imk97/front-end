@@ -65,7 +65,7 @@ export class AssignservicePage {
 
   private addCheckboxes() {
     console.log(this.itemsData)
-    const itemArray = this.form.controls.items as FormArray
+    const itemArray = this.form.get('items') as FormArray
     itemArray.clear()
     this.itemsData.forEach((i) => {
       const control = new FormControl(i);

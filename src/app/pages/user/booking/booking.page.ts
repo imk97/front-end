@@ -21,7 +21,7 @@ export class BookingPage {
   getDate: Boolean = true;
   model: string[] = [];
   Item: string[] = [];
-  Time : number;
+  Time : string;
 
   intervals: any[] = [
     '1,000km'
@@ -63,8 +63,8 @@ export class BookingPage {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` })
     }).subscribe(
       res => {
-        console.log(res['availableHours'])
-        this.Time = res['availableHours']
+        console.log(res['availabelHours'])
+        this.Time = res['availabelHours']
       } 
     );
   }

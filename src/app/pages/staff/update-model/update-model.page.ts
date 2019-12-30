@@ -83,7 +83,7 @@ export class UpdateModelPage {
               text: 'Yes',
               handler: () => {
                 res => {
-                  const nurl = `${this.global.url + '/deleteModel'}`
+                  const nurl = `${this.global.url + '/deleteModel'}/${id}`
                   this.http.get(nurl, {
                     headers: new HttpHeaders({
                       'Content-Type': 'application/json',

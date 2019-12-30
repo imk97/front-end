@@ -36,9 +36,8 @@ export class ListbookingPage implements OnInit {
     console.log(formatDate(this.today, 'yyyy-MM-dd', 'en'))
     this.date = this.today
     this.bookservice.list(this.date).subscribe(
-      bookings => {
-        this.bookings = bookings['date']
-        console.log(this.bookings)
+      booking => {
+        this.bookings = booking['plateInfo']
       }
     )
   }
