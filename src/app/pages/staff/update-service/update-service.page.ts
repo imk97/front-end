@@ -5,6 +5,8 @@ import { DataService } from 'src/app/service/data.service';
 import { formatDate } from '@angular/common';
 import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { StaffService } from 'src/app/service/staff.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-service',
@@ -21,7 +23,8 @@ export class UpdateServicePage {
 
   public model: string
 
-  constructor(private http: HttpClient, private global: GlobalService, private dataservice: DataService, private formBuilder: FormBuilder, private staffservice: StaffService) {
+  constructor(private http: HttpClient, private global: GlobalService, private dataservice: DataService, private formBuilder: FormBuilder, private staffservice: StaffService, private toast: ToastController
+    , private router: Router) {
     this.form = this.formBuilder.group({
       items: new FormArray([])
     })
@@ -73,7 +76,7 @@ export class UpdateServicePage {
 
   private addCheckboxes() {
     console.log(this.itemsData)
-    const itemArray = this.form.controls.items as FormArray
+    const itemArray = this.form.get('items') as FormArray
     itemArray.clear()
     this.itemsData.forEach((i) => {
       const control = new FormControl(i);
@@ -101,6 +104,15 @@ export class UpdateServicePage {
       })
     }).subscribe(res => {
       console.log(res['message'])
+      this.toast.create({
+        message: res['message'],
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => { this.router.navigate(['/staff'])}
+          }
+        ]
+      }).then(res =>  res.present())
     })
   }
 

@@ -28,7 +28,7 @@ export class EditUserPage implements OnInit {
   }
 
   userid() {
-    this.userservice.getUsersById(this.dataservice.getID()).subscribe(
+    this.userservice.getUsersById(Number(sessionStorage.getItem('id'))).subscribe(
       res => {
         this.user = res['user'][0];
         console.log(this.user)

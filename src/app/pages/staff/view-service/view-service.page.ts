@@ -34,7 +34,7 @@ export class ViewServicePage {
         'Authorization': `Bearer ${this.global.token()}`
       })
     }).subscribe(res => {
-      this.items.push(res['message'])
+      this.items = res['message']
       this.iditem()
     });
   }

@@ -9,23 +9,27 @@
 
 <ion-content [scrollEvents]="true">
   <ion-item lines="inset">
-    <ion-label>Full Name:</ion-label>
-    <ion-label>{{ user.name }}</ion-label>
+    <b>Full Name : </b>
+    <ion-label> {{ user.name }} </ion-label>
   </ion-item>
   <ion-item lines="inset">
-    <ion-label>IC No:</ion-label>
-    <ion-label>{{ user.ic }}</ion-label>
+    <b>IC No :</b>
+    <ion-label> {{ user.ic }} </ion-label>
   </ion-item>
   <ion-item lines="inset">
-    <ion-label>Address:</ion-label>
-    <ion-label>{{ user.address }}</ion-label>
+    <b>Address :</b>
+    <ion-label> {{ user.address }} </ion-label>
   </ion-item>
   <ion-item lines="inset">
-    <ion-label>Username:</ion-label>
+    <b>Username :</b>
     <ion-label> {{ user.username }}</ion-label>
   </ion-item>
   <ion-item lines="inset">
-    <ion-label>Phone</ion-label>
+    <b>Email :</b>
+    <ion-label> {{ user.email }}</ion-label>
+  </ion-item>
+  <ion-item lines="inset">
+    <b>Phone :</b>
     <ion-label>{{ user.phone }}</ion-label>
   </ion-item>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

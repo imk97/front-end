@@ -9,7 +9,7 @@ import { DataService } from './service/data.service';
 })
 export class GlobalService {
 
-  public url = 'http://192.168.43.91:8000/api';
+  public url = 'http://localhost:8000/api';
   constructor(private dataservice: DataService ) {}
 
   httpOptions = {

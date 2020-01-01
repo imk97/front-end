@@ -29,10 +29,7 @@ export class PasswordPage implements OnInit {
       }).then(res => res.present());
     } else {
       const nurl = `${this.global.url + '/password'}`;
-      this.http.put(nurl, {
-        'curr_password': this.Newpassword.curr_password, 'new_password': this.Newpassword.new_password,
-        'username': sessionStorage.getItem('username')
-      },
+      this.http.put(nurl, { 'curr_password': this.Newpassword.curr_password, 'new_password': this.Newpassword.new_password, 'id': sessionStorage.getItem('id') },
         {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',

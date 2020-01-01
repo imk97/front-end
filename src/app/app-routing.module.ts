@@ -97,6 +97,7 @@ const routes: Routes = [
   { path: 'update-service', loadChildren: './pages/staff/update-service/update-service.module#UpdateServicePageModule' },
   { path: 'update-model', loadChildren: './pages/staff/update-model/update-model.module#UpdateModelPageModule' },
   { path: 'admin', loadChildren: './pages/admin/home/home.module#HomePageModule' },
+  { path: 'forgot-password', loadChildren: './pages/forgot-password/forgot-password.module#ForgotPasswordPageModule' },
   
 
 ];

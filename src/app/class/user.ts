@@ -4,6 +4,7 @@ export class User {
     public ic:number;
     public address:string;
     public username:string;
+    public email:string;
     public password:string;
     public phone:string;
     public role:number;
