@@ -33,7 +33,8 @@ export class PasswordPage implements OnInit {
         {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.global.token()}`
+            'Authorization': `Bearer ${this.global.token()}`,
+            'Accept': 'application/json'
           })
         }).subscribe(res => {
           if (res['message'] == 'password not match') {

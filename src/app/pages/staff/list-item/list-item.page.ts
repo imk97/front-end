@@ -33,7 +33,8 @@ export class ListItemPage implements OnInit {
     this.http.get(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.itemsData = res['items']
@@ -52,7 +53,8 @@ export class ListItemPage implements OnInit {
     this.http.get(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       if (res['message'] == 'success') {
@@ -78,7 +80,8 @@ export class ListItemPage implements OnInit {
     this.http.get(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.item = res['item'][0].item
@@ -94,7 +97,7 @@ export class ListItemPage implements OnInit {
       'item': this.item,
       'id': this.id
     }, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}`, 'Accept': 'application/json' })
     }).subscribe(res => {
       if (res['message'] == 'successful') {
         this.alert.create({

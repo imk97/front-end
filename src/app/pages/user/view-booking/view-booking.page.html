@@ -2,19 +2,19 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button color="light" text=""></ion-back-button>
+      <ion-title>Monitor Service</ion-title>
     </ion-buttons>
-    <ion-title>Monitor Service</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-progress-bar [hidden]="starter" type="indeterminate"></ion-progress-bar>
 
 <ion-content>
-  <ion-list *ngFor="let item of data">
+  <ion-list *ngFor="let item of data; let i = index" [attr.data-index]="i">
     <ion-item>
       {{ item }}
-      <!--<ion-spinner type="crescent"></ion-spinner>-->
+      <div *ngIf="certain[i] == item">
+        <ion-icon name="checkmark"></ion-icon>
+      </div>
     </ion-item>
-    <div *ngIf="certain === item">
-      <ion-progress-bar type="indeterminate"></ion-progress-bar>
-    </div>
   </ion-list>
 </ion-content>

@@ -43,7 +43,8 @@ export class UpdateServicePage {
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       console.log(res['message'])
@@ -66,7 +67,8 @@ export class UpdateServicePage {
     this.http.get(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.itemsData = res['items']
@@ -100,7 +102,8 @@ export class UpdateServicePage {
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       console.log(res['message'])

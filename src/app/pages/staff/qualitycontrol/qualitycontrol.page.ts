@@ -44,7 +44,8 @@ export class QualitycontrolPage implements OnInit {
     {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe( res => {
       

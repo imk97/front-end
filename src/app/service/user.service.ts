@@ -23,7 +23,8 @@ export class UserService {
     return this.http.get<User[]>(this.global.url+'/users', {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
     }).pipe(
       catchError(this.handleError('getUsers', []))
@@ -36,7 +37,8 @@ export class UserService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
     }).pipe(
       catchError(this.handleError('getUsersById'))
@@ -46,7 +48,8 @@ export class UserService {
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.global.url+'/add', user, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       })
     })
     .pipe(
@@ -60,7 +63,8 @@ export class UserService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
     })
     .pipe(
@@ -74,7 +78,8 @@ export class UserService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
     })
     .pipe(
@@ -87,7 +92,8 @@ export class UserService {
     return this.http.put(nurl, password, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).pipe(
       catchError(this.handleError('changePassword'))
@@ -98,7 +104,8 @@ export class UserService {
     //console.log(users);
     return this.http.post<User>(this.global.url+'/login', users, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       })
     }).pipe(
       catchError(this.handleError('loginUsers'))

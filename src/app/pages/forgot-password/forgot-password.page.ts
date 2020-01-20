@@ -21,7 +21,8 @@ export class ForgotPasswordPage implements OnInit {
     const nurl = `${this.global.url+'/password/email'}`
     this.http.post(nurl, { 'email': this.email }, { headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.global.token()}`
+      'Authorization': `Bearer ${this.global.token()}`,
+      'Accept': 'application/json'
     })}).subscribe(res => {
       this.alert.create({
         message: res['message'],

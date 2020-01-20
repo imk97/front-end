@@ -13,7 +13,7 @@ import { Dialogs } from '@ionic-native/dialogs/ngx';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   constructor(private userservice: UserService, private router: Router,
     public toastController: ToastController, public loading: LoadingController,
@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
   user: User = new User();
   public errorMsg;
 
-  ngOnInit() {
+  ionViewWillEnter() {
   }
 
   onLogin() {

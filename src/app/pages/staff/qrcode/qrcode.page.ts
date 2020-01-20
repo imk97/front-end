@@ -10,8 +10,7 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class QrcodePage implements OnInit {
 
-  constructor(private barcodeScanner: BarcodeScanner, private route: ActivatedRoute,
-    private dataservice: DataService) { }
+  constructor(private barcodeScanner: BarcodeScanner, private route: ActivatedRoute, private dataservice: DataService) { }
   
   data: any;
   qrData: any;

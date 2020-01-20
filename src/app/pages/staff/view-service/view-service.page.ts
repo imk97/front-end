@@ -31,7 +31,8 @@ export class ViewServicePage {
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.items = res['message']
@@ -47,7 +48,8 @@ export class ViewServicePage {
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.ids = []
@@ -71,7 +73,8 @@ export class ViewServicePage {
             this.http.get(nurl, {
               'headers': new HttpHeaders({
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.global.token()}`
+                'Authorization': `Bearer ${this.global.token()}`,
+                'Accept': 'application/json'
               })
             }).subscribe(res => {
               this.toast.create({

@@ -26,7 +26,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Date</ion-label>
-      <ion-datetime name="date" [(ngModel)]="book.date" picker-format="YYYY-MM-DD" min={{currentYear}} (ionChange)="availableHours()"></ion-datetime>
+      <ion-datetime name="date" [(ngModel)]="book.date" picker-format="YYYY-MM-DD" min={{currentYear}} max="2099" (ionChange)="availableHours()"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Time</ion-label>

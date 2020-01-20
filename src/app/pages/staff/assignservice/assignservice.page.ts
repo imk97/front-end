@@ -51,7 +51,8 @@ export class AssignservicePage {
     this.http.get(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       //const data = res['items']
@@ -87,7 +88,8 @@ export class AssignservicePage {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
       }).subscribe(res => {
         if (res['0'] == '201') {

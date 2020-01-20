@@ -24,7 +24,18 @@ export class BookingPage {
   Time : string;
 
   intervals: any[] = [
-    '1,000km'
+    '1,000km',
+    '5,000km',
+    '10,000km',
+    '20,000km',
+    '30,000km',
+    '40,000km',
+    '50,000km',
+    '60,000km',
+    '70,000km',
+    '80,000km',
+    '90,000km',
+    '100,000km'
   ]
   
   constructor(private bookservice: BookService, private alertController: AlertController,
@@ -60,7 +71,7 @@ export class BookingPage {
     this.http.post(this.global.url + '/availableHours', {
       "date": this.book.date,
     }, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}`, 'Accept': 'application/json' })
     }).subscribe(
       res => {
         console.log(res['availabelHours'])
@@ -73,7 +84,8 @@ export class BookingPage {
     this.http.get(this.global.url+'/list', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe( res => { 
       const models = res['model'] 

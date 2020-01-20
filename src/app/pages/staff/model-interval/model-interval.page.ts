@@ -24,7 +24,8 @@ export class ModelIntervalPage implements OnInit {
     this.http.post(this.global.url + '/save', { "name": this.model.name }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.toast.create({

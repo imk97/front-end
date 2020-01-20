@@ -21,7 +21,7 @@ export class HomePage {
 
   user() {
     const nurl = `${this.global.url + '/users'}`
-    this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` }) }).subscribe(
+    this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}`, 'Accept': 'application/json' }) }).subscribe(
       res => {
         this.users = []
         this.users = res['data']
@@ -32,7 +32,7 @@ export class HomePage {
 
   staff() {
     const nurl = `${this.global.url + '/staff'}`
-    this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` }) }).subscribe(
+    this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}`, 'Accept': 'application/json' }) }).subscribe(
       res => {
         this.users = []
         this.users = res['data']
@@ -43,7 +43,7 @@ export class HomePage {
 
   onAssign(id: string) {
     const nurl = `${this.global.url+'/role'}/${id}`
-    this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` }) }).subscribe(
+    this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}`, 'Accept': 'application/json' }) }).subscribe(
       res => {
         this.toast.create({
           message: res['message'],

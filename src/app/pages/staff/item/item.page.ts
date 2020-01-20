@@ -52,7 +52,8 @@ export class ItemPage {
     this.http.get(this.global.url + '/list', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.models = res['model']

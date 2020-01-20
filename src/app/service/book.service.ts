@@ -27,7 +27,8 @@ export class BookService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
       })
       .pipe(
@@ -41,7 +42,8 @@ export class BookService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
       }).pipe(
         catchError(this.handleError('list', []))
@@ -54,7 +56,8 @@ export class BookService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.global.token()}`
+          'Authorization': `Bearer ${this.global.token()}`,
+          'Accept': 'application/json'
         })
       }).pipe(
         catchError(this.handleError('listbyid'))
@@ -66,7 +69,8 @@ export class BookService {
     return this.http.delete(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization':  `Bearer ${this.global.token()}`
+        'Authorization':  `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).pipe(catchError(this.handleError('deletebyplateNo')))
   }
@@ -75,7 +79,8 @@ export class BookService {
     return this.http.get(this.global.url+'/availableHours', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).pipe(catchError(this.handleError('availableHours')))
   }

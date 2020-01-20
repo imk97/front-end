@@ -19,7 +19,8 @@ export class StaffService {
     return this.http.post<Item>(this.global.url + '/item', model, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).pipe(catchError(this.handleError('modelInterval', model)))
   }
@@ -28,7 +29,8 @@ export class StaffService {
     return this.http.get<Item[]>(this.global.url+'/list', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).pipe(catchError(this.handleError('listCar', [])));
   }

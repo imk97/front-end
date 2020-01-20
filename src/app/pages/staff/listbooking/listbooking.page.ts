@@ -37,7 +37,17 @@ export class ListbookingPage implements OnInit {
     this.date = this.today
     this.bookservice.list(this.date).subscribe(
       booking => {
-        this.bookings = booking['plateInfo']
+        if(booking['plateInfo'] == 'No data') {
+          this.alert.create({
+            message: booking['plateInfo'],
+            buttons: [{
+              text: 'Okay',
+              handler: () => { this.router.navigate(['/staff']) }
+            }]
+          }).then(res => { res.present() })
+        } else {
+          this.bookings = booking['plateInfo']
+        }
       }
     )
   }

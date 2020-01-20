@@ -26,7 +26,8 @@ export class UpdateModelPage {
     this.http.get(nurl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.models = []
@@ -52,7 +53,8 @@ export class UpdateModelPage {
     }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.global.token()}`
+        'Authorization': `Bearer ${this.global.token()}`,
+        'Accept': 'application/json'
       })
     }).subscribe(res => {
       this.toast.create({
@@ -60,7 +62,7 @@ export class UpdateModelPage {
         buttons: [
           {
             text: 'Close',
-            handler: () => { this.hide = true }
+            handler: () => { this.hide = true; this.list() }
           }
         ]
       }).then(res => {
@@ -81,26 +83,25 @@ export class UpdateModelPage {
             },
             {
               text: 'Yes',
-              handler: () => {
-                res => {
-                  const nurl = `${this.global.url + '/deleteModel'}/${id}`
-                  this.http.get(nurl, {
-                    headers: new HttpHeaders({
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${this.global.token()}`
-                    })
-                  }).subscribe(res => {
-                      this.toast.create({
-                        message: res['message'],
-                        buttons: [
-                          {
-                            text: 'Close',
-                            handler: () => { res => res.dismiss(); this.list() }
-                          }
-                        ]
-                      }).then(res => { res.present() })
+              handler: () => { res => {}
+                const nurl = `${this.global.url + '/deleteModel'}/${id}`
+                this.http.get(nurl, {
+                  headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.global.token()}`,
+                    'Accept': 'application/json'
                   })
-                }
+                }).subscribe(res => {
+                  this.toast.create({
+                    message: res['message'],
+                    buttons: [
+                      {
+                        text: 'Close',
+                        handler: () => { res => res.dismiss(); this.list() }
+                      }
+                    ]
+                  }).then(res => { res.present() })
+                })
               }
             }
           ]
