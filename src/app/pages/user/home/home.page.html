@@ -19,7 +19,7 @@
 
   <ion-card mode="ios" *ngFor="let books of book">
     <ion-card-header>
-      <ion-card-subtitle class="text-center" (click)="getservice(books.plateNum)">{{ books.plateNum }}
+      <ion-card-subtitle class="text-center" (click)="getservice(books.plateNum, books.id)">{{ books.plateNum }}
       </ion-card-subtitle>
     </ion-card-header>
   </ion-card>

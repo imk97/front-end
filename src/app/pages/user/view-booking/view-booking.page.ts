@@ -35,14 +35,9 @@ export class ViewBookingPage implements OnInit {
   }
 
   getservice() {
-    this.http.post(this.global.url + '/services', {
-      'plateNum': this.dataservice.getPlateNum(),
-      'date': formatDate(this.today, 'yyyy-MM-dd', 'en')
-    }, {
+    this.http.post(this.global.url + '/services', { 'plateNum': this.dataservice.getPlateNum(), 'date': formatDate(this.today, 'yyyy-MM-dd', 'en') }, {
       headers: new HttpHeaders({
-        'Content-Type': 'applicaiton/json',
-        'Authorization': `Bearer ${this.global.token()}`,
-        'Accept': 'application/json'
+        'Content-Type': 'applicaiton/json', 'Authorization': `Bearer ${this.global.token()}`, 'Accept': 'application/json'
       })
     }).subscribe(
       res => {
@@ -76,14 +71,23 @@ export class ViewBookingPage implements OnInit {
       subscribe(res => {
         //this.stop = res['message']
         const data = res['item'][0]
-        for(var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
           this.certain.push(data[i])
         }
         console.log(this.certain)
       })
-      /*if(this.test.length > 0) {
-        this.starter = this.stop
-      }*/
+    /*if(this.test.length > 0) {
+      this.starter = this.stop
+    }*/
+  }
+
+  delete() {
+    this.alert.create({ message: 'Are you sure want to remove all the checkmark?', buttons: [{ text: 'Cancel', handler: ()=> {} }, { text: 'Yes', handler: ()=> {
+      const nurl = `${this.global.url+'/delete'}`
+      this.http.get(nurl, { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.global.token()}` }) }).subscribe(res => {
+        if(res['message'] == 'deleted') { this.router.navigate(['/user']) }
+      })
+    } } ] }).then(alert => alert.present())
   }
 
 }

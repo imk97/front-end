@@ -80,7 +80,7 @@ export class HomePage {
     this.router.navigate(['/viewbooking'])
   }
 
-  getservice(plateNum: string) {
+  getservice(plateNum: string, id: string) {
     this.action.create({
       buttons: [
         {
@@ -106,7 +106,7 @@ export class HomePage {
                   {
                     text: 'Yes',
                     handler: () => {
-                      this.bookservice.deletebyplateNo(plateNum).subscribe(
+                      this.bookservice.deletebyplateNo(id).subscribe(
                         res => {
                           if (res['message'] == 'deleted') {
                             this.toast.create({
